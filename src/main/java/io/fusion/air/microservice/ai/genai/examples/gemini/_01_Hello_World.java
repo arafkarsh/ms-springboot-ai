@@ -80,10 +80,10 @@ public class _01_Hello_World {
 
     /**
      * Conversation with Memory
-     * @param anthropicChatModel
+     * @param geminiChatModel
      */
-    public static void conversationChatWithMemoryGemini(ChatLanguageModel anthropicChatModel) {
-        ChatMemory chatMemoryAnthropic = TokenWindowChatMemory.withMaxTokens(300,
+    public static void conversationChatWithMemoryGemini(ChatLanguageModel geminiChatModel) {
+        ChatMemory chatMemoryGemini = TokenWindowChatMemory.withMaxTokens(300,
                 new OpenAiTokenizer(AiConstants.GPT_4o));
 
         // You have full control over the chat memory.
@@ -91,15 +91,15 @@ public class _01_Hello_World {
         // (e.g. you might not want to store few-shot examples to save on tokens).
         // You can process/modify the message before saving if required.
         String request1 = "Hello, my name is karsh";
-        chatMemoryAnthropic.add(userMessage(request1));
-        AiMessage answer1 = anthropicChatModel.generate(chatMemoryAnthropic.messages()).content();
-        chatMemoryAnthropic.add(answer1);
+        chatMemoryGemini.add(userMessage(request1));
+        AiMessage answer1 = geminiChatModel.generate(chatMemoryGemini.messages()).content();
+        chatMemoryGemini.add(answer1);
         AiBeans.printResult(request1, answer1.text());
 
         String request2 = "What is my name?";
-        chatMemoryAnthropic.add(userMessage(request2));
-        AiMessage answer2 = anthropicChatModel.generate(chatMemoryAnthropic.messages()).content();
-        chatMemoryAnthropic.add(answer2);
+        chatMemoryGemini.add(userMessage(request2));
+        AiMessage answer2 = geminiChatModel.generate(chatMemoryGemini.messages()).content();
+        chatMemoryGemini.add(answer2);
         AiBeans.printResult(request2, answer2.text());
     }
 }
