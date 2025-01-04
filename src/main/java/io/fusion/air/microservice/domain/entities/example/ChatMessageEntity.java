@@ -56,12 +56,12 @@ public class ChatMessageEntity extends AbstractBaseEntityWithUUID {
     /**
      * Create ChatMessage Entity
      *
-     * @param _userId
-     * @param _chatMessage
+     * @param userId
+     * @param chatMessage
      */
-    public ChatMessageEntity(String _userId, String _chatMessage) {
-        this.userId            = _userId;
-        this.chatMessage     = _chatMessage;
+    public ChatMessageEntity(String userId, String chatMessage) {
+        this.userId            = userId;
+        this.chatMessage     = chatMessage;
     }
 
     /**
@@ -118,6 +118,7 @@ public class ChatMessageEntity extends AbstractBaseEntityWithUUID {
      * Return This Product ID / Name
      * @return
      */
+    @Override
     public String toString() {
         return super.toString() + "|" + userId;
     }
