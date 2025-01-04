@@ -1,5 +1,7 @@
 package io.fusion.air.microservice.utils.algos;
 
+import io.fusion.air.microservice.utils.Std;
+
 /**
  * @author: Araf Karsh Hamid
  * @version:
@@ -58,13 +60,16 @@ public class Trie {
         }
     }
 
+    public static final String APP = "app";
+    public static final String APP2 = "app   = ";
+
     public static void main(String[] args) {
         Trie trie = new Trie();
         trie.insert("apple");
-        System.out.println("apple = "+trie.search("apple"));   // returns true
-        System.out.println("app   = "+trie.search("app"));     // returns false
-        System.out.println("app   = "+trie.startsWith("app")); // returns true
-        trie.insert("app");
-        System.out.println("app   = "+trie.search("app"));     // returns true
+        Std.println("apple = "+trie.search("apple"));   // returns true
+        Std.println(APP2+trie.search(APP));     // returns false
+        Std.println(APP2+trie.startsWith(APP)); // returns true
+        trie.insert(APP);
+        Std.println(APP2+trie.search(APP));     // returns true
     }
 }

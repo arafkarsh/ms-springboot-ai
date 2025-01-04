@@ -80,7 +80,7 @@ public class AiConstants {
     @Value("${langchain4j.ollama.model:llama3}")
     private  String ollamaModel;
 
-    public static String OLLAMA_URL;
+    private static String OLLAMA_URL;
     public static final String OLLAMA_LLAMA3                          = "llama3";
     public static final String OLLAMA_MISTRAL                         = "mistral";
     public static final String OLLAMA_PHI_3                             = "phi3";
@@ -138,5 +138,13 @@ public class AiConstants {
      */
     public static String getOpenAIDefaultModel() {
         return (OPEN_AI_DEFAULT_MODEL == null) ? GPT_3_5_TURBO  : OPEN_AI_DEFAULT_MODEL;
+    }
+
+    /**
+     * Get the OLLAMA URL
+     * @return
+     */
+    public static String getOllamaUrl() {
+        return OLLAMA_URL;
     }
 }

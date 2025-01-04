@@ -88,14 +88,15 @@ public class _02_Multi_Layered_Perceptron_Example {
 
     /**
      * Create the Data Set Iterator
-     * @param rngSeed
-     * @param train
+     *
      * @param batchSize
+     * @param train
+     * @param rngSeed
      * @return
      * @throws IOException
      */
     private static MnistDataSetIterator createDataSetIterator(
-            int rngSeed, boolean train, int batchSize) throws IOException {
+            int batchSize, boolean train, int rngSeed) throws IOException {
         return new MnistDataSetIterator(batchSize, train, rngSeed);
     }
 
