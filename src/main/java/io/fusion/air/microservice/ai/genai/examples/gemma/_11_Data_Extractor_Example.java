@@ -47,47 +47,47 @@ import static java.util.Arrays.asList;
  */
 public class _11_Data_Extractor_Example {
 
-    public static void numberExtractor(DataExtractorAssistant extractor) {
+    public static void numberExtractor(DataExtractorAssistant gemmaDataExtractor) {
         // Extract Numbers
         String request = """
                     After countless millennia of computation, the supercomputer Deep Thought 
                     finally announced that the answer to the ultimate question of life, the 
                     universe, and everything was forty two.""";
 
-        int intNumber = extractor.extractInt(request);
+        int intNumber = gemmaDataExtractor.extractInt(request);
         AiBeans.printResult(request, "Number = "+intNumber);
     }
 
-    public static void dateTimeExtractor(DataExtractorAssistant extractor) {
+    public static void dateTimeExtractor(DataExtractorAssistant gemmaDataExtractor) {
         // Extract Date and Time
         StringBuilder sb = new StringBuilder();
         String request = """
                     The tranquility pervaded the evening of 1968, just fifteen minutes 
                     shy of midnight, following the celebrations of Independence Day.""";
 
-        LocalDate date = extractor.extractDateFrom(request);
+        LocalDate date = gemmaDataExtractor.extractDateFrom(request);
         sb.append("Date      = ").append(date).append("\n");
-        LocalTime time = extractor.extractTimeFrom(request);
+        LocalTime time = gemmaDataExtractor.extractTimeFrom(request);
         sb.append("Time      = ").append(time).append("\n");
-        LocalDateTime dateTime = extractor.extractDateTimeFrom(request);
+        LocalDateTime dateTime = gemmaDataExtractor.extractDateTimeFrom(request);
         sb.append("DateTime = ").append(dateTime);
 
         AiBeans.printResult(request, sb.toString());
     }
 
-    public static void pojoExtractor(DataExtractorAssistant extractor) {
+    public static void pojoExtractor(DataExtractorAssistant gemmaDataExtractor) {
         // POJO Person Extractor
         String request = """
                 In 1968, amidst the fading echoes of Indian Independence Day, 
                 a child named John arrived under the calm evening sky. 
                 This newborn, bearing the surname Doe, marked the start of a new journey.""";
 
-        Person person = extractor.extractPersonFrom(request);
+        Person person = gemmaDataExtractor.extractPersonFrom(request);
         AiBeans.printResult(request, person.toString());
     }
 
-    public static void complexPojoExtractor(ChatLanguageModel model) {
-        ChefAssistant chefAssistant = AiServices.create(ChefAssistant.class, model);
+    public static void complexPojoExtractor(ChatLanguageModel gemmaChatModel) {
+        ChefAssistant chefAssistant = AiServices.create(ChefAssistant.class, gemmaChatModel);
         Recipe recipe = chefAssistant.createRecipeFrom("cucumber", "tomato", "feta", "onion", "olives", "lemon");
         Std.println(recipe);
 
@@ -100,36 +100,36 @@ public class _11_Data_Extractor_Example {
 
     public static void main(String[] args) {
         // Create Chat Language Model Google Gemma
-        ChatLanguageModel model = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_GEMMA);
+        ChatLanguageModel gemmaChatModel = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_GEMMA);
         AiBeans.printModelDetails(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_GEMMA);
         // Create Ai Assistant
-        DataExtractorAssistant extractor = AiServices.create(DataExtractorAssistant.class, model);
+        DataExtractorAssistant gemmaDataExtractor = AiServices.create(DataExtractorAssistant.class, gemmaChatModel);
 
         try {
             Std.println("Number Extractor =================================================");
             // Extract Numbers
-            numberExtractor(extractor);
+            numberExtractor(gemmaDataExtractor);
         } catch (Exception e) {
             Std.println(ERROR_MESSAGE+e.getMessage());
         }
         try {
             Std.println("Date & Time Extractor =============================================");
             // Extract Date and Time
-            dateTimeExtractor(extractor);
+            dateTimeExtractor(gemmaDataExtractor);
         } catch (Exception e) {
             Std.println(ERROR_MESSAGE+e.getMessage());
         }
         try {
             Std.println("Pojo Extractor ====================================================");
             // POJO Person Extractor
-             pojoExtractor(extractor);
+             pojoExtractor(gemmaDataExtractor);
         } catch (Exception e) {
             Std.println(ERROR_MESSAGE+e.getMessage());
         }
         try {
             Std.println("Complex Pogo Extractor ============================================");
             // Complex Pojo Extractor with Descriptions (rules)
-            complexPojoExtractor(model);
+            complexPojoExtractor(gemmaChatModel);
         } catch (Exception e) {
             Std.println(ERROR_MESSAGE+e.getMessage());
         }

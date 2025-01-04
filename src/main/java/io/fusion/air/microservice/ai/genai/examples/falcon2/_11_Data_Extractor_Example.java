@@ -47,47 +47,47 @@ import static java.util.Arrays.asList;
  */
 public class _11_Data_Extractor_Example {
 
-    public static void numberExtractor(DataExtractorAssistant extractor) {
+    public static void numberExtractor(DataExtractorAssistant falconDataExtractor) {
         // Extract Numbers
         String request = """
                     After countless millennia of computation, the supercomputer Deep Thought 
                     finally announced that the answer to the ultimate question of life, the 
                     universe, and everything was forty two.""";
 
-        int intNumber = extractor.extractInt(request);
+        int intNumber = falconDataExtractor.extractInt(request);
         AiBeans.printResult(request, "Number = "+intNumber);
     }
 
-    public static void dateTimeExtractor(DataExtractorAssistant extractor) {
+    public static void dateTimeExtractor(DataExtractorAssistant falconDataExtractor) {
         // Extract Date and Time
         StringBuilder sb = new StringBuilder();
         String request = """
                     The tranquility pervaded the evening of 1968, just fifteen minutes 
                     shy of midnight, following the celebrations of Independence Day.""";
 
-        LocalDate date = extractor.extractDateFrom(request);
+        LocalDate date = falconDataExtractor.extractDateFrom(request);
         sb.append("Date      = ").append(date).append("\n");
-        LocalTime time = extractor.extractTimeFrom(request);
+        LocalTime time = falconDataExtractor.extractTimeFrom(request);
         sb.append("Time      = ").append(time).append("\n");
-        LocalDateTime dateTime = extractor.extractDateTimeFrom(request);
+        LocalDateTime dateTime = falconDataExtractor.extractDateTimeFrom(request);
         sb.append("DateTime = ").append(dateTime);
 
         AiBeans.printResult(request, sb.toString());
     }
 
-    public static void pojoExtractor(DataExtractorAssistant extractor) {
+    public static void pojoExtractor(DataExtractorAssistant falconDataExtractor) {
         // POJO Person Extractor
         String request = """
                 In 1968, amidst the fading echoes of Indian Independence Day, 
                 a child named John arrived under the calm evening sky. 
                 This newborn, bearing the surname Doe, marked the start of a new journey.""";
 
-        Person person = extractor.extractPersonFrom(request);
+        Person person = falconDataExtractor.extractPersonFrom(request);
         AiBeans.printResult(request, person.toString());
     }
 
-    public static void complexPojoExtractor(ChatLanguageModel model) {
-        ChefAssistant chefAssistant = AiServices.create(ChefAssistant.class, model);
+    public static void complexPojoExtractor(ChatLanguageModel falconChatModel) {
+        ChefAssistant chefAssistant = AiServices.create(ChefAssistant.class, falconChatModel);
         Recipe recipe = chefAssistant.createRecipeFrom("cucumber", "tomato", "feta", "onion", "olives", "lemon");
         Std.println(recipe);
 
@@ -100,35 +100,35 @@ public class _11_Data_Extractor_Example {
 
     public static void main(String[] args) {
         // Create Chat Language Model Google Falcon 2
-        ChatLanguageModel model = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_FALCON_2);
+        ChatLanguageModel falconChatModel = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_FALCON_2);
         // Create Data Extractor
-        DataExtractorAssistant extractor = AiServices.create(DataExtractorAssistant.class, model);
+        DataExtractorAssistant falconDataExtractor = AiServices.create(DataExtractorAssistant.class, falconChatModel);
         AiBeans.printModelDetails(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_FALCON_2);
         try {
             Std.println("Number Extractor =================================================");
             // Extract Numbers
-            numberExtractor(extractor);
+            numberExtractor(falconDataExtractor);
         } catch (Exception e) {
             Std.println(ERROR_MESSAGE+e.getMessage());
         }
         try {
             Std.println("Date & Time Extractor =============================================");
             // Extract Date and Time
-            dateTimeExtractor(extractor);
+            dateTimeExtractor(falconDataExtractor);
         } catch (Exception e) {
             Std.println(ERROR_MESSAGE+e.getMessage());
         }
         try {
             Std.println("Pojo Extractor ====================================================");
             // POJO Person Extractor
-             pojoExtractor(extractor);
+             pojoExtractor(falconDataExtractor);
         } catch (Exception e) {
             Std.println(ERROR_MESSAGE+e.getMessage());
         }
         try {
             Std.println("Complex Pogo Extractor ============================================");
             // Complex Pojo Extractor with Descriptions (rules)
-            complexPojoExtractor(model);
+            complexPojoExtractor(falconChatModel);
         } catch (Exception e) {
             Std.println(ERROR_MESSAGE+e.getMessage());
         }
