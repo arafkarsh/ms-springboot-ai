@@ -51,8 +51,8 @@ public class Trie {
     }
 
     class TrieNode {
-        public TrieNode[] children;
-        public boolean isEndOfWord;
+        private final TrieNode[] children;
+        private boolean isEndOfWord;
 
         public TrieNode() {
             children = new TrieNode[26];
@@ -66,10 +66,10 @@ public class Trie {
     public static void main(String[] args) {
         Trie trie = new Trie();
         trie.insert("apple");
-        Std.println("apple = "+trie.search("apple"));   // returns true
-        Std.println(APP2+trie.search(APP));     // returns false
-        Std.println(APP2+trie.startsWith(APP)); // returns true
+        Std.println("apple = "+trie.search("apple"));  // returns true
+        Std.println(APP2+trie.search(APP));                     // returns false
+        Std.println(APP2+trie.startsWith(APP));                // returns true
         trie.insert(APP);
-        Std.println(APP2+trie.search(APP));     // returns true
+        Std.println(APP2+trie.search(APP));                     // returns true
     }
 }
