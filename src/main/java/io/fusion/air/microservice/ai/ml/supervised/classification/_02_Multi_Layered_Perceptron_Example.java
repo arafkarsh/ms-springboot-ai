@@ -78,7 +78,7 @@ public class _02_Multi_Layered_Perceptron_Example {
         DataSetIterator mnistTrain = createDataSetIterator(batchSize, true, rngSeed);
         DataSetIterator mnistTest  = createDataSetIterator(batchSize, false, rngSeed);
         // Step 2: Create the Neural Network Configuration
-        MultiLayerConfiguration conf = createMultiModelConfig( rngSeed,  batchSize);
+        MultiLayerConfiguration conf = createMultiModelConfig( rngSeed);
         // Step 3: Create the Model
         // Step 4: Run the Model on mnistTrain Data Set
         MultiLayerNetwork model = createAndRunMultiLayerNetworkModel(conf,  mnistTrain,  250);
@@ -108,10 +108,9 @@ public class _02_Multi_Layered_Perceptron_Example {
      * •	Output Layer: An output layer with 1000 input neurons (from the previous layer), 10 output
      *      neurons (one for each digit), softmax activation for probability output, and Xavier weight initialization.
      * @param rngSeed
-     * @param batchSize
      * @return
      */
-    private static MultiLayerConfiguration createMultiModelConfig(int rngSeed, int batchSize) {
+    private static MultiLayerConfiguration createMultiModelConfig(int rngSeed) {
         Std.println("Step 2: Create Multi Layer Configuration... ");
         // To Create 784 Neuron Input layer
         final int numRows = 28;
