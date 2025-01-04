@@ -1,4 +1,5 @@
-# AI/ML & Gen Ai - Springboot / Langchain4J & Deep Learning 4J Examples
+# AI/ML & Gen Ai -  Langchain4J & Deep Learning 4J
+## Java Springboot Examples
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=arafkarsh_ms-springboot-324-ai&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=arafkarsh_ms-springboot-324-ai)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=arafkarsh_ms-springboot-324-ai&metric=bugs)](https://sonarcloud.io/summary/new_code?id=arafkarsh_ms-springboot-324-ai)

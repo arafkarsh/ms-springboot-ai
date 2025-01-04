@@ -33,34 +33,34 @@ import java.util.List;
  */
 public class _08_FewShot_Example {
 
-    private static List<ChatMessage> fewShotHistory = new ArrayList<>();
+    private static List<ChatMessage> fewShotHistoryLlama = new ArrayList<>();
 
     /**
      * Build the Context - Few Shot Message Context with Custom Action
      */
     public static void buildContext() {
         // Adding positive feedback example to history
-        fewShotHistory.add(UserMessage.from(
+        fewShotHistoryLlama.add(UserMessage.from(
                 "I love the new update! The interface is very user-friendly and the new features are amazing!"));
-        fewShotHistory.add(AiMessage.from(
+        fewShotHistoryLlama.add(AiMessage.from(
                 "Action: forward input to positive feedback storage\nReply: Thank you very much for this great feedback! We have transmitted your message to our product development team who will surely be very happy to hear this. We hope you continue enjoying using our product."));
 
         // Adding negative feedback example to history
-        fewShotHistory.add(UserMessage
+        fewShotHistoryLlama.add(UserMessage
                 .from("I am facing frequent crashes after the new update on my Android device."));
-        fewShotHistory.add(AiMessage.from(
+        fewShotHistoryLlama.add(AiMessage.from(
                 "Action: open new ticket - crash after update Android\nReply: We are so sorry to hear about the issues you are facing. We have reported the problem to our development team and will make sure this issue is addressed as fast as possible. We will send you an email when the fix is done, and we are always at your service for any further assistance you may need."));
 
         // Adding another positive feedback example to history
-        fewShotHistory.add(UserMessage
+        fewShotHistoryLlama.add(UserMessage
                 .from("Your app has made my daily tasks so much easier! Kudos to the team!"));
-        fewShotHistory.add(AiMessage.from(
+        fewShotHistoryLlama.add(AiMessage.from(
                 "Action: forward input to positive feedback storage\nReply: Thank you so much for your kind words! We are thrilled to hear that our app is making your daily tasks easier. Your feedback has been shared with our team. We hope you continue to enjoy using our app!"));
 
         // Adding another negative feedback example to history
-        fewShotHistory.add(UserMessage
+        fewShotHistoryLlama.add(UserMessage
                 .from("The new feature is not working as expected. It’s causing data loss."));
-        fewShotHistory.add(AiMessage.from(
+        fewShotHistoryLlama.add(AiMessage.from(
                 "Action: open new ticket - data loss by new feature\nReply:We apologize for the inconvenience caused. Your feedback is crucial to us, and we have reported this issue to our technical team. They are working on it on priority. We will keep you updated on the progress and notify you once the issue is resolved. Thank you for your patience and support."));
     }
 
@@ -68,12 +68,12 @@ public class _08_FewShot_Example {
      * Send the Message
      * @param request
      */
-    public static String sendChatMessage(ChatLanguageModel model, String request) {
+    public static String sendChatMessage(ChatLanguageModel llamaModel, String request) {
         // Adding user message
         ChatMessage chatMessage = UserMessage.from(request);
-        fewShotHistory.add(chatMessage);
+        fewShotHistoryLlama.add(chatMessage);
         // Response from Ai
-        Response<AiMessage> response = model.generate(fewShotHistory);
+        Response<AiMessage> response = llamaModel.generate(fewShotHistoryLlama);
         // Print Result
         AiBeans.printResult(chatMessage.text(), response.content().text());
         return response.content().text();
@@ -81,17 +81,17 @@ public class _08_FewShot_Example {
 
     public static void main(String[] args) {
         // Create Chat Language Model llama3
-        ChatLanguageModel model = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_LLAMA3);
+        ChatLanguageModel llamaModel = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_LLAMA3);
         AiBeans.printModelDetails(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_LLAMA3);
         // Build Chat Context
         buildContext();
         // Message 1
-        sendChatMessage(model, "How can your app be so slow? Please do something about it!");
+        sendChatMessage(llamaModel, "How can your app be so slow? Please do something about it!");
         // Message 2
-        sendChatMessage(model, "The app is fantastic!");
+        sendChatMessage(llamaModel, "The app is fantastic!");
         // Message 3
-        sendChatMessage(model, "Simplified my daily tasks! Good work team.");
+        sendChatMessage(llamaModel, "Simplified my daily tasks! Good work team.");
         // Message 4
-        sendChatMessage(model, "App Crashes twice or thrice in a week. Stability is not that good.");
+        sendChatMessage(llamaModel, "App Crashes twice or thrice in a week. Stability is not that good.");
     }
 }
