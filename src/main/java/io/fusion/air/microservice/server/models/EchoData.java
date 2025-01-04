@@ -21,6 +21,7 @@ import java.util.Objects;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import io.fusion.air.microservice.utils.DateJsonSerializer;
+import io.fusion.air.microservice.utils.Std;
 import io.fusion.air.microservice.utils.Utils;
 
 /**
@@ -45,10 +46,10 @@ public class EchoData {
 	
 	/**
 	 * Echo Constructor
-	 * @param _wordData
+	 * @param wordData
 	 */
-	public EchoData(String _wordData) {
-		this.word = _wordData;
+	public EchoData(String wordData) {
+		this.word = wordData;
 		requestTime = LocalDateTime.now();
 		day = requestTime.getDayOfYear();
 	}
@@ -99,7 +100,7 @@ public class EchoData {
 	}
 	
 	public static void main(String[] args) {
-		System.out.println("Serialize "
+		Std.println("Serialize "
 		+Utils.toJsonString(new EchoData("John")));
 	}
 

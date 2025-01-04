@@ -18,6 +18,8 @@ package io.fusion.air.microservice.server.config;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -46,13 +48,14 @@ public class StandardConfig implements Serializable {
     private HashMap<String, String> appPropertyMap;
 
     public StandardConfig() {
+        // Nothing to show
     }
 
-    public ArrayList<String> getAppPropertyList() {
+    public List<String> getAppPropertyList() {
         return appPropertyList;
     }
 
-    public HashMap<String, String> getAppPropertyMap() {
+    public Map<String, String> getAppPropertyMap() {
         return appPropertyMap;
     }
 

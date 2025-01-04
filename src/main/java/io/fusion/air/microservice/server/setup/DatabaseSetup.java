@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 package io.fusion.air.microservice.server.setup;
+// Spring
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-// Spring
 import io.fusion.air.microservice.server.config.DatabaseConfig;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.persistence.EntityManagerFactory;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,8 +32,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-// Jakarta
-import jakarta.persistence.EntityManagerFactory;
+
 import javax.sql.DataSource;
 
 /**
@@ -47,8 +46,16 @@ import javax.sql.DataSource;
 @EnableTransactionManagement
 public class DatabaseSetup {
 
-    @Autowired
+    // Autowired using the Constructor
     private DatabaseConfig dbConfig;
+
+    /**
+     * Autowired using the Constructor
+     * @param dbCfg
+     */
+    public DatabaseSetup(DatabaseConfig dbCfg) {
+        dbConfig = dbCfg;
+    }
 
     /**
      * Create the DataSource for H2 Database
@@ -60,10 +67,11 @@ public class DatabaseSetup {
                 return h2DataSource();
             case DatabaseConfig.DB_POSTGRESQL:
                 return postgreSQLDataSource();
+            default:
+                // Returns H2 Database if Nothing Matches
+                EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
+                return builder.setType(EmbeddedDatabaseType.H2).build();
         }
-        // Returns H2 Database if Nothing Matches
-        EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
-        return builder.setType(EmbeddedDatabaseType.H2).build();
     }
 
     /**

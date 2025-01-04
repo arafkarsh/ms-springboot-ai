@@ -54,10 +54,8 @@ public class EchoResponseData {
 	 * @param responseTime
 	 * @param dayOftheYear
 	 */
-	public EchoResponseData(String wordData, 
-			LocalDateTime responseTime, int dayOftheYear) {
-		this(wordData, LocalDateTime.now(), 
-				LocalDateTime.now().getDayOfYear(), "Good Morning " + wordData);
+	public EchoResponseData(String wordData, LocalDateTime responseTime, int dayOftheYear) {
+		this(wordData, responseTime, dayOftheYear, "Good Morning " + wordData);
 	}	
 	
 	/**
@@ -91,6 +89,7 @@ public class EchoResponseData {
 	/**
 	 * Returns 
 	 */
+	@Override
 	public String toString() {
 		return wordData;
 	}
@@ -98,8 +97,19 @@ public class EchoResponseData {
 	/**
 	 * Returns the HashCode
 	 */
+	@Override
 	public int hashCode() {
 		return wordData.hashCode();
+	}
+
+	public boolean equals(Object o) {
+		if(o == null) {
+			return false;
+		}
+		if(o instanceof EchoResponseData erd) {
+			return wordData.equals(erd.getWordData());
+		}
+		return false;
 	}
 
 	/**
