@@ -34,12 +34,26 @@ import static dev.langchain4j.data.message.UserMessage.userMessage;
 public class _01_Hello_World {
 
     /**
+     * DownloadAllData the Chat Language Model
+     * @param args
+     */
+    public static void main(String[] args) {
+
+        // Create Chat Language Model - Google Gemini 1.5 Pro
+        ChatLanguageModel model = AiBeans.getChatLanguageModelGoogle(AiConstants.GOOGLE_GEMINI_PRO);
+
+        helloWorldWithGemini(model);
+        conversationChatWithGemini(model);
+        conversationChatWithMemoryGemini(model);
+    }
+
+    /**
      * Simple Hello World
      * @param model
      */
-    public static void helloWorld(ChatLanguageModel model) {
+    public static void helloWorldWithGemini(ChatLanguageModel model) {
         // Start interacting
-        String request = "Hello My Space...";
+        String request = "Hello My Space... Google Gemini 1.5 Pro ";
         String response = model.generate(request);
         AiBeans.printModelDetails(AiConstants.LLM_VERTEX, AiConstants.GOOGLE_GEMINI_PRO);
         AiBeans.printResult(request, response);
@@ -49,7 +63,7 @@ public class _01_Hello_World {
      * Conversation Chain
      * @param model
      */
-    public static void conversationChat(ChatLanguageModel model) {
+    public static void conversationChatWithGemini(ChatLanguageModel model) {
         ConversationalChain chain = ConversationalChain.builder()
                 .chatLanguageModel(model)
                 // .chatMemory() // you can override default chat memory
@@ -68,7 +82,7 @@ public class _01_Hello_World {
      * Conversation with Memory
      * @param model
      */
-    public static void conversationChatWithMemory(ChatLanguageModel model) {
+    public static void conversationChatWithMemoryGemini(ChatLanguageModel model) {
         ChatMemory chatMemory = TokenWindowChatMemory.withMaxTokens(300,
                 new OpenAiTokenizer(AiConstants.GPT_4o));
 
@@ -87,19 +101,5 @@ public class _01_Hello_World {
         AiMessage answer2 = model.generate(chatMemory.messages()).content();
         chatMemory.add(answer2);
         AiBeans.printResult(request2, answer2.text());
-    }
-
-    /**
-     * DownloadAllData the Chat Language Model
-     * @param args
-     */
-    public static void main(String[] args) {
-
-        // Create Chat Language Model - Google Gemini 1.5 Pro
-        ChatLanguageModel model = AiBeans.getChatLanguageModelGoogle(AiConstants.GOOGLE_GEMINI_PRO);
-
-        helloWorld(model);
-        conversationChat(model);
-        conversationChatWithMemory(model);
     }
 }
