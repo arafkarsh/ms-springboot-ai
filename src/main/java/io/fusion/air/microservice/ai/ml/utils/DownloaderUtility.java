@@ -59,13 +59,14 @@ public enum DownloaderUtility {
     STYLETRANSFER("styletransfer.zip", "dl4j-examples", "b2b90834d667679d7ee3dfb1f40abe94", "3MB"),
     VIDEOEXAMPLE("video.zip","dl4j-examples", "56274eb6329a848dce3e20631abc6752", "8.5MB");
 
-    private final String BASE_URL;
-    private final String DATA_FOLDER;
-    private final String ZIP_FILE;
-    private final String MD5;
-    private final String DATA_SIZE;
+    private final String baseUrl;
+    private final String dataFolder;
+    private final String zipFile;
+    private final String md5;
+    private final String dataSize;
     private static final String AZURE_BLOB_URL = "https://dl4jdata.blob.core.windows.net/dl4j-examples";
 
+    private static final String LINE = "_______________________________________________________________________";
     /**
      * For use with resources uploaded to Azure blob storage.
      *
@@ -88,11 +89,11 @@ public enum DownloaderUtility {
      * @param dataSize   of zipfile
      */
     DownloaderUtility(String baseURL, String zipFile, String dataFolder, String md5, String dataSize) {
-        BASE_URL = baseURL;
-        DATA_FOLDER = dataFolder;
-        ZIP_FILE = zipFile;
-        MD5 = md5;
-        DATA_SIZE = dataSize;
+        baseUrl = baseURL;
+        this.dataFolder = dataFolder;
+        this.zipFile = zipFile;
+        this.md5 = md5;
+        this.dataSize = dataSize;
     }
 
     /**
@@ -123,31 +124,31 @@ public enum DownloaderUtility {
      * @throws Exception
      */
     public String download(boolean returnSubFolder) throws Exception {
-        String dataURL = BASE_URL + "/" + ZIP_FILE;
-        String downloadPath = FilenameUtils.concat(System.getProperty("java.io.tmpdir"), ZIP_FILE);
-        String extractDir = FilenameUtils.concat(System.getProperty("user.home"), "dl4j-examples-data/" + DATA_FOLDER);
+        String dataURL = baseUrl + "/" + zipFile;
+        String downloadPath = FilenameUtils.concat(System.getProperty("java.io.tmpdir"), zipFile);
+        String extractDir = FilenameUtils.concat(System.getProperty("user.home"), "dl4j-examples-data/" + dataFolder);
         if (!new File(extractDir).exists())
             new File(extractDir).mkdirs();
         String dataPathLocal = extractDir;
         if (returnSubFolder) {
-            String resourceName = ZIP_FILE.substring(0, ZIP_FILE.lastIndexOf(".zip"));
+            String resourceName = zipFile.substring(0, zipFile.lastIndexOf(".zip"));
             dataPathLocal = FilenameUtils.concat(extractDir, resourceName);
         }
         int downloadRetries = 7;
         if (!new File(dataPathLocal).exists() || new File(dataPathLocal).list().length == 0) {
-            Std.println("_______________________________________________________________________");
-            Std.println("Downloading data (" + DATA_SIZE + ") and extracting to \n\t" + dataPathLocal);
-            Std.println("_______________________________________________________________________");
+            Std.println(LINE);
+            Std.println("Downloading data (" + dataSize + ") and extracting to \n\t" + dataPathLocal);
+            Std.println(LINE);
             Downloader.downloadAndExtract("files",
                     new URL(dataURL),
                     new File(downloadPath),
                     new File(extractDir),
-                    MD5,
+                    md5,
                     downloadRetries);
         } else {
-            Std.println("_______________________________________________________________________");
+            Std.println(LINE);
             Std.println("Example data present in \n\t" + dataPathLocal);
-            Std.println("_______________________________________________________________________");
+            Std.println(LINE);
         }
         return dataPathLocal;
     }
