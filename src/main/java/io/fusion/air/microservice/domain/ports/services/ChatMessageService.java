@@ -29,8 +29,8 @@ public interface ChatMessageService {
     /**
      * Returns List of Chat Messages from ChatMessages
      *
-     * @param _userId
+     * @param userId
      * @return
      */
-    public List<ChatMessageEntity> fetchByUserId(String _userId);
+    public List<ChatMessageEntity> fetchByUserId(String userId);
 }

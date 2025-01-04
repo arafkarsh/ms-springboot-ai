@@ -16,10 +16,7 @@
 package io.fusion.air.microservice.domain.entities.core;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.*;
-import java.sql.Timestamp;
-import java.util.Date;
 
 /**
  * @author: Araf Karsh Hamid
@@ -98,7 +95,6 @@ public class AbstractBaseEntity {
      * 4. Updated By
      * @return
      */
-    @JsonIgnore
     public AuditLog getAuditLog() {
         return auditLog;
     }

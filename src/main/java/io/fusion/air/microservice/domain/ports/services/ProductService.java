@@ -17,8 +17,6 @@ package io.fusion.air.microservice.domain.ports.services;
 
 import io.fusion.air.microservice.domain.entities.example.ProductEntity;
 import io.fusion.air.microservice.domain.models.example.Product;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -47,10 +45,10 @@ public interface ProductService {
 
     /**
      * Search for the Product By the Product Names Like 'name'
-     * @param _name
+     * @param name
      * @return
      */
-    public List<ProductEntity> fetchProductsByName(String _name);
+    public List<ProductEntity> fetchProductsByName(String name);
 
     /**
      * Search for the Product By Price Greater Than or Equal To
@@ -116,17 +114,17 @@ public interface ProductService {
 
     /**
      * De Activate Product
-     * @param _productId
+     * @param productId
      * @return
      */
-    public ProductEntity deActivateProduct(UUID _productId);
+    public ProductEntity deActivateProduct(UUID productId);
 
     /**
      * Activate Product
-     * @param _productId
+     * @param productId
      * @return
      */
-    public ProductEntity activateProduct(UUID _productId);
+    public ProductEntity activateProduct(UUID productId);
 
     /**
      * Delete the product (Permanently Deletes the Product)
