@@ -16,6 +16,7 @@ import io.fusion.air.microservice.ai.genai.core.prompts.StructuredPromptPatientN
 import io.fusion.air.microservice.ai.genai.utils.AiBeans;
 import io.fusion.air.microservice.ai.genai.utils.AiConstants;
 import io.fusion.air.microservice.utils.Std;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -34,6 +35,7 @@ public class RAGHealthCareService implements HealthCareAssistant {
     /**
      * Create RAG Health Care Service
      */
+    @Autowired
     public RAGHealthCareService() {
         this(AiConstants.LLM_OPENAI, AiConstants.GPT_4o);
     }

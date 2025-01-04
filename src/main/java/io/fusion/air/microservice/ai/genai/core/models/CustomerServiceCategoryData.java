@@ -17,7 +17,8 @@ package io.fusion.air.microservice.ai.genai.core.models;
 import org.springframework.stereotype.Service;
 
 import static java.util.Arrays.asList;
-import java.util.HashMap;
+
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
@@ -38,7 +39,7 @@ public class CustomerServiceCategoryData {
      * Customer Service Category Data
      */
     public CustomerServiceCategoryData() {
-        serviceData = new HashMap<>();
+        serviceData = new EnumMap<>(CustomerServiceCategory.class);
         setupBillingData();
         setupTechnicalSupport();
         setupAccountManagement();

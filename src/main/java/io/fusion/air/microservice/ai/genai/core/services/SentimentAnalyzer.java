@@ -30,6 +30,8 @@ import io.fusion.air.microservice.ai.genai.utils.AiBeans;
  */
 public class SentimentAnalyzer {
 
+    private SentimentAnalyzer() {}
+
     /**
      * Analyze the Sentiment of a text.
      * Rating based on Positive, Neutral and Negative
