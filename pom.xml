@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.fusion.air.ai</groupId>
 	<artifactId>ai-service</artifactId>
-	<version>0.3.1</version>
+	<version>0.3.4</version>
 	<packaging>jar</packaging>
 	<name>GenAiFusionService</name>
 	<description>Gen AI Fusion Template</description>
@@ -15,7 +15,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.3.4</version>
+		<version>3.4.1</version>
 	</parent>
 	<!-- =================================================================== -->
 	<!-- Properties / Versions -->
@@ -63,15 +63,15 @@
 		<jakarta.persistence.version>3.1.0</jakarta.persistence.version>
 
 		<!-- Spring Libraries ============================================== -->
-		<spring.boot.version>3.3.4</spring.boot.version>
+		<spring.boot.version>3.4.1</spring.boot.version>
 		<spring.cloud.version>2023.0.1</spring.cloud.version>
-		<spring.security.version>6.3.3</spring.security.version>
+		<spring.security.version>6.4.2</spring.security.version>
 
 		<!-- Spring Kafka ================================================= -->
 		<spring.kafka.version>3.2.4</spring.kafka.version>
 
 		<!-- Open API v3 - Swagger UI =================================== -->
-		<openapi.webmvc.version>2.6.0</openapi.webmvc.version>
+		<openapi.webmvc.version>2.7.0</openapi.webmvc.version>
 		<openapi.common.version>1.8.0</openapi.common.version>
 
 		<!-- Gen AI : LangChain4J  ======================================= -->
@@ -380,12 +380,6 @@
 			<artifactId>spring-boot-starter-websocket</artifactId>
 			<version>${spring.boot.version}</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-webflux -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-webflux</artifactId>
-			<version>${spring.boot.version}</version>
-		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-aop -->
 		<dependency>
@@ -544,17 +538,20 @@
 		<!-- ================================================================= -->
 		<!-- API Docs - Open API v3.0 (Swagger 3) -->
 		<!-- ================================================================= -->
+		<!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui -->
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
 			<version>${openapi.webmvc.version}</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-common -->
+
+		<!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-common -->
 		<dependency>
 			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-common</artifactId>
-			<version>${openapi.common.version}</version>
+			<artifactId>springdoc-openapi-starter-common</artifactId>
+			<version>${openapi.webmvc.version}</version>
 		</dependency>
+
 		<!-- End of Dependency Definitions -->
 	</dependencies>
 
