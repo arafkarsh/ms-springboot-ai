@@ -39,9 +39,9 @@ import static dev.langchain4j.data.message.UserMessage.userMessage;
  */
 public class _07_ChatMemory_Example {
 
-    public static void chatMemoryConversations(ChatLanguageModel model) {
+    public static void chatMemoryConversations(ChatLanguageModel gemmaChatModel) {
         Tokenizer tokenizer = new OpenAiTokenizer(AiConstants.GPT_4_TURBO);
-        ChatMemory chatMemory = TokenWindowChatMemory.withMaxTokens(2000, tokenizer);
+        ChatMemory chatMemoryGemma = TokenWindowChatMemory.withMaxTokens(2000, tokenizer);
 
         // Setting the Context
         SystemMessage systemMessage = SystemMessage.from(
@@ -51,7 +51,7 @@ public class _07_ChatMemory_Example {
                         Java back-end, PostgreSQL Database,and Spring Data JPA.
                         You are checking the knowledge and skill-set of the team. 
                         """);
-        chatMemory.add(systemMessage);
+        chatMemoryGemma.add(systemMessage);
 
         // Conversation - 1
         UserMessage userMessage1 = userMessage(
@@ -60,9 +60,9 @@ public class _07_ChatMemory_Example {
                         2. How to add Security Features from Spring Security perspective?
                         Answer short in three to five lines maximum.
                  """);
-        chatMemory.add(userMessage1);
-        Response<AiMessage> response1 = model.generate(chatMemory.messages());
-        chatMemory.add(response1.content());
+        chatMemoryGemma.add(userMessage1);
+        Response<AiMessage> response1 = gemmaChatModel.generate(chatMemoryGemma.messages());
+        chatMemoryGemma.add(response1.content());
         // Print Result
         AiBeans.printResult(userMessage1.text(), response1.content().text());
 
@@ -72,44 +72,44 @@ public class _07_ChatMemory_Example {
                 Give a concrete example implementation for the 2 points. 
                 Be short, 10 lines of code maximum.
                 """);
-        chatMemory.add(userMessage2);
-        Response<AiMessage> response2 = model.generate(chatMemory.messages());
-        chatMemory.add(response2.content());
+        chatMemoryGemma.add(userMessage2);
+        Response<AiMessage> response2 = gemmaChatModel.generate(chatMemoryGemma.messages());
+        chatMemoryGemma.add(response2.content());
         // Print Result
         AiBeans.printResult(userMessage2.text(), response2.content().text());
     }
 
-    public static void chatMemoryWithMultipleUsers(ChatLanguageModel model) {
-        Assistant assistant = AiServices.builder(Assistant.class)
-                .chatLanguageModel(model)
+    public static void chatMemoryWithMultipleUsers(ChatLanguageModel gemmaChatModel) {
+        Assistant assistantGemma = AiServices.builder(Assistant.class)
+                .chatLanguageModel(gemmaChatModel)
                 .chatMemoryProvider(memoryId -> MessageWindowChatMemory.withMaxMessages(10))
                 .build();
 
         String request1 = "UUID-1 >> Hello, my name is John Sam Doe";
-        String response1 = assistant.chat("UUID-1", request1);
+        String response1 = assistantGemma.chat("UUID-1", request1);
         AiBeans.printResult(request1, response1);
 
         String request2 = "UUID-2, >> Hello, my name is Jane Daisy Doe";
-        String response2 = assistant.chat("UUID-2", request2);
+        String response2 = assistantGemma.chat("UUID-2", request2);
         AiBeans.printResult(request2, response2);
 
         String request3 = "What is my name?";
-        String response3 = assistant.chat("UUID-1", "UUID-1 >> "+request3);
+        String response3 = assistantGemma.chat("UUID-1", "UUID-1 >> "+request3);
         AiBeans.printResult("UUID-1 >> "+request3, response3);
 
-        String response4 = assistant.chat("UUID-2", "UUID-2 >> "+request3);
+        String response4 = assistantGemma.chat("UUID-2", "UUID-2 >> "+request3);
         AiBeans.printResult("UUID-2 >> "+request3, response4);
 
     }
 
     public static void main(String[] args)  {
         // Create Chat Language Model Google Gemma
-        ChatLanguageModel model = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_GEMMA);
+        ChatLanguageModel gemmaChatModel = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_GEMMA);
         AiBeans.printModelDetails(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_GEMMA);
         // Chat Memory Conversations
-        chatMemoryConversations(model);
+        chatMemoryConversations(gemmaChatModel);
 
         // Chat Memory with Multiple user
-        chatMemoryWithMultipleUsers(model);
+        chatMemoryWithMultipleUsers(gemmaChatModel);
     }
 }

@@ -52,11 +52,11 @@ public class _07_ChatMemory_Example {
 
     /**
      * Chat Memory Conversation
-     * @param model
+     * @param openAIModel
      */
-    public static void chatMemoryConversations(ChatLanguageModel model) {
+    public static void chatMemoryConversations(ChatLanguageModel openAIModel) {
         Tokenizer tokenizer = new OpenAiTokenizer(AiConstants.getOpenAIDefaultModel());
-        ChatMemory chatMemory = TokenWindowChatMemory.withMaxTokens(2000, tokenizer);
+        ChatMemory chatMemoryOpenAi = TokenWindowChatMemory.withMaxTokens(2000, tokenizer);
 
         // Setting the Context
         SystemMessage systemMessage = SystemMessage.from(
@@ -66,7 +66,7 @@ public class _07_ChatMemory_Example {
                         Java back-end, PostgreSQL Database,and Spring Data JPA.
                         You are checking the knowledge and skill-set of the team. 
                         """);
-        chatMemory.add(systemMessage);
+        chatMemoryOpenAi.add(systemMessage);
 
         // Conversation - 1
         UserMessage userMessage1 = userMessage(
@@ -75,9 +75,9 @@ public class _07_ChatMemory_Example {
                         2. How to add Security Features from Spring Security perspective?
                         Answer short in three to five lines maximum.
                  """);
-        chatMemory.add(userMessage1);
-        Response<AiMessage> response1 = model.generate(chatMemory.messages());
-        chatMemory.add(response1.content());
+        chatMemoryOpenAi.add(userMessage1);
+        Response<AiMessage> response1 = openAIModel.generate(chatMemoryOpenAi.messages());
+        chatMemoryOpenAi.add(response1.content());
         // Print Result
         AiBeans.printResult(userMessage1.text(), response1.content().text());
 
@@ -87,51 +87,51 @@ public class _07_ChatMemory_Example {
                 Give a concrete example implementation for the 2 points. 
                 Be short, 10 lines of code maximum.
                 """);
-        chatMemory.add(userMessage2);
-        Response<AiMessage> response2 = model.generate(chatMemory.messages());
-        chatMemory.add(response2.content());
+        chatMemoryOpenAi.add(userMessage2);
+        Response<AiMessage> response2 = openAIModel.generate(chatMemoryOpenAi.messages());
+        chatMemoryOpenAi.add(response2.content());
         // Print Result
         AiBeans.printResult(userMessage2.text(), response2.content().text());
     }
 
     /**
      * Chat Memory with Multiple Users
-     * @param model
+     * @param openAiModel
      */
-    public static void chatMemoryWithMultipleUsers(ChatLanguageModel model) {
-        Assistant assistant = AiServices.builder(Assistant.class)
-                .chatLanguageModel(model)
+    public static void chatMemoryWithMultipleUsers(ChatLanguageModel openAiModel) {
+        Assistant assistantOpenAI = AiServices.builder(Assistant.class)
+                .chatLanguageModel(openAiModel)
                 .chatMemoryProvider(memoryId -> MessageWindowChatMemory.withMaxMessages(10))
                 .build();
 
         String request1 = "UUID-1 >> Hello, my name is John Sam Doe";
-        String response1 = assistant.chat("UUID-1", request1);
+        String response1 = assistantOpenAI.chat("UUID-1", request1);
         AiBeans.printResult(request1, response1);
 
         String request2 = "UUID-2, >> Hello, my name is Jane Daisy Doe";
-        String response2 = assistant.chat("UUID-2", request2);
+        String response2 = assistantOpenAI.chat("UUID-2", request2);
         AiBeans.printResult(request2, response2);
 
         String request3 = "What is my name?";
-        String response3 = assistant.chat("UUID-1", "UUID-1 >> "+request3);
+        String response3 = assistantOpenAI.chat("UUID-1", "UUID-1 >> "+request3);
         AiBeans.printResult("UUID-1 >> "+request3, response3);
 
-        String response4 = assistant.chat("UUID-2", "UUID-2 >> "+request3);
+        String response4 = assistantOpenAI.chat("UUID-2", "UUID-2 >> "+request3);
         AiBeans.printResult("UUID-2 >> "+request3, response4);
     }
 
     /**
      * In Memory Embedding Example
      */
-    private static void inMemoryEmbeddingExample(String data1, String data2, String request) {
+    private static void inMemoryEmbeddingOpenAI(String dataC1, String dataC2, String request) {
         InMemoryEmbeddingStore<TextSegment> embeddingStore = new InMemoryEmbeddingStore<>();
         EmbeddingModel embeddingModel = new AllMiniLmL6V2EmbeddingModel();
         // Set Data 1
-        TextSegment segment1 = TextSegment.from(data1);
+        TextSegment segment1 = TextSegment.from(dataC1);
         Embedding embedding1 = embeddingModel.embed(segment1).content();
         embeddingStore.add(embedding1, segment1);
         // Set Data 2
-        TextSegment segment2 = TextSegment.from(data2);
+        TextSegment segment2 = TextSegment.from(dataC2);
         Embedding embedding2 = embeddingModel.embed(segment2).content();
         embeddingStore.add(embedding2, segment2);
         // Embed Query Request
@@ -140,8 +140,8 @@ public class _07_ChatMemory_Example {
         EmbeddingMatch<TextSegment> embeddingMatch = relevant.get(0);
         // Show the Score and Matched Response
         Std.println("--[Data]-----------------------------------------------------------");
-        Std.println("Data 1: "+data1);
-        Std.println("Data 2: "+data2);
+        Std.println("Data 1: "+dataC1);
+        Std.println("Data 2: "+dataC2);
         AiBeans.printResult(request,
                 "Score:  "+embeddingMatch.score()
                           +"\nResult: "+embeddingMatch.embedded().text());
@@ -149,19 +149,19 @@ public class _07_ChatMemory_Example {
 
     public static void main(String[] args)  {
         // Create Chat Language Model - Open AI GPT 4o
-        ChatLanguageModel model = AiBeans.getChatLanguageModelOpenAi(AiConstants.GPT_4o);
+        ChatLanguageModel openAIModel = AiBeans.getChatLanguageModelOpenAi(AiConstants.GPT_4o);
         AiBeans.printModelDetails(AiConstants.LLM_OPENAI, AiConstants.GPT_4o);
         // Chat Memory Conversations
-        chatMemoryConversations(model);
+        chatMemoryConversations(openAIModel);
         // Chat Memory with Multiple user
-        chatMemoryWithMultipleUsers(model);
+        chatMemoryWithMultipleUsers(openAIModel);
         // InMemory Embedding Example
-        inMemoryEmbeddingExample(
+        inMemoryEmbeddingOpenAI(
                 "I like football, Chess, Tennis and Cricket. However, I like Cricket most!",
                 "The weather is good today. It's neither hot nor cold.",
                 "What is your favourite sport?");
 
-        inMemoryEmbeddingExample(
+        inMemoryEmbeddingOpenAI(
                 "I like movies. My favorite genre is Sci-Fi. I am not a sports person.",
                 "The weather is good today. It's neither hot nor cold.",
                 "What is your favourite sport?");
