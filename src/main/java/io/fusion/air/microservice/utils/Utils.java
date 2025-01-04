@@ -21,16 +21,17 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 // Custom
 import io.fusion.air.microservice.domain.exceptions.InvalidInputException;
+import io.fusion.air.microservice.domain.exceptions.ResourceException;
 import io.fusion.air.microservice.domain.models.core.StandardResponse;
 // Spring
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.ResponseCookie;
+import org.springframework.core.io.ClassPathResource;
 // Java
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
-
+import org.slf4j.MDC;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -48,7 +49,6 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Stream;
-import org.slf4j.MDC;
 
 /**
  * 
@@ -650,7 +650,7 @@ public final class Utils {
 			}
 			return Paths.get(fileUrl.toURI());
 		} catch (URISyntaxException | IOException e) {
-			throw new RuntimeException(e);
+			throw new ResourceException(e);
 		}
 	}
 

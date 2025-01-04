@@ -195,10 +195,10 @@ public class CPU {
 	 * @return
 	 */
 	public static double getSystemCpuLoad2() {
-		// Std.println("getSystemCpuLoad() <=> "+invoke("getSystemCpuLoad"));
 		try {	return  (Double) invoke("getSystemCpuLoad",osMXBean); }
 		catch (Exception ignored) {
-			/* ignored.printStackTrace(); */}
+			Std.println(ignored.getMessage());
+		}
 		return 0.0;
 	}
 
