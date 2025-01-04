@@ -39,9 +39,9 @@ import static dev.langchain4j.data.message.UserMessage.userMessage;
  */
 public class _07_ChatMemory_Example {
 
-    public static void chatMemoryConversations(ChatLanguageModel model) {
+    public static void chatMemoryConversations(ChatLanguageModel falconChatModel) {
         Tokenizer tokenizer = new OpenAiTokenizer(AiConstants.GPT_4_TURBO);
-        ChatMemory chatMemory = TokenWindowChatMemory.withMaxTokens(2000, tokenizer);
+        ChatMemory chatMemoryFalcon = TokenWindowChatMemory.withMaxTokens(2000, tokenizer);
 
         // Setting the Context
         SystemMessage systemMessage = SystemMessage.from(
@@ -51,7 +51,7 @@ public class _07_ChatMemory_Example {
                         Java back-end, PostgreSQL Database,and Spring Data JPA.
                         You are checking the knowledge and skill-set of the team. 
                         """);
-        chatMemory.add(systemMessage);
+        chatMemoryFalcon.add(systemMessage);
 
         // Conversation - 1
         UserMessage userMessage1 = userMessage(
@@ -60,9 +60,9 @@ public class _07_ChatMemory_Example {
                         2. How to add Security Features from Spring Security perspective?
                         Answer short in three to five lines maximum.
                  """);
-        chatMemory.add(userMessage1);
-        Response<AiMessage> response1 = model.generate(chatMemory.messages());
-        chatMemory.add(response1.content());
+        chatMemoryFalcon.add(userMessage1);
+        Response<AiMessage> response1 = falconChatModel.generate(chatMemoryFalcon.messages());
+        chatMemoryFalcon.add(response1.content());
         // Print Result
         AiBeans.printResult(userMessage1.text(), response1.content().text());
 
@@ -72,44 +72,44 @@ public class _07_ChatMemory_Example {
                 Give a concrete example implementation for the 2 points. 
                 Be short, 10 lines of code maximum.
                 """);
-        chatMemory.add(userMessage2);
-        Response<AiMessage> response2 = model.generate(chatMemory.messages());
-        chatMemory.add(response2.content());
+        chatMemoryFalcon.add(userMessage2);
+        Response<AiMessage> response2 = falconChatModel.generate(chatMemoryFalcon.messages());
+        chatMemoryFalcon.add(response2.content());
         // Print Result
         AiBeans.printResult(userMessage2.text(), response2.content().text());
     }
 
-    public static void chatMemoryWithMultipleUsers(ChatLanguageModel model) {
-        Assistant assistant = AiServices.builder(Assistant.class)
-                .chatLanguageModel(model)
+    public static void chatMemoryWithMultipleUsers(ChatLanguageModel falconChatModel) {
+        Assistant assistantFalcon = AiServices.builder(Assistant.class)
+                .chatLanguageModel(falconChatModel)
                 .chatMemoryProvider(memoryId -> MessageWindowChatMemory.withMaxMessages(10))
                 .build();
 
         String request1 = "UUID-1 >> Hello, my name is John Sam Doe";
-        String response1 = assistant.chat("UUID-1", request1);
+        String response1 = assistantFalcon.chat("UUID-1", request1);
         AiBeans.printResult(request1, response1);
 
         String request2 = "UUID-2, >> Hello, my name is Jane Daisy Doe";
-        String response2 = assistant.chat("UUID-2", request2);
+        String response2 = assistantFalcon.chat("UUID-2", request2);
         AiBeans.printResult(request2, response2);
 
         String request3 = "What is my name?";
-        String response3 = assistant.chat("UUID-1", "UUID-1 >> "+request3);
+        String response3 = assistantFalcon.chat("UUID-1", "UUID-1 >> "+request3);
         AiBeans.printResult("UUID-1 >> "+request3, response3);
 
-        String response4 = assistant.chat("UUID-2", "UUID-2 >> "+request3);
+        String response4 = assistantFalcon.chat("UUID-2", "UUID-2 >> "+request3);
         AiBeans.printResult("UUID-2 >> "+request3, response4);
 
     }
 
     public static void main(String[] args)  {
         // Create Chat Language Model Google Falcon 2
-        ChatLanguageModel model = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_FALCON_2);
+        ChatLanguageModel falconChatModel = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_FALCON_2);
         AiBeans.printModelDetails(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_FALCON_2);
         // Chat Memory Conversations
-        chatMemoryConversations(model);
+        chatMemoryConversations(falconChatModel);
 
         // Chat Memory with Multiple user
-        chatMemoryWithMultipleUsers(model);
+        chatMemoryWithMultipleUsers(falconChatModel);
     }
 }
