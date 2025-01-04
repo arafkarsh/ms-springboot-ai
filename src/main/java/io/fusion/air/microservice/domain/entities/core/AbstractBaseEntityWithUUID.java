@@ -16,8 +16,8 @@
 package io.fusion.air.microservice.domain.entities.core;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.*;
+
 import java.util.UUID;
 
 /**

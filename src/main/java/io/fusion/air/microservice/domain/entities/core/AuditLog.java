@@ -21,12 +21,12 @@
 package io.fusion.air.microservice.domain.entities.core;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
 import org.slf4j.MDC;
 
 import java.sql.Timestamp;
 import java.util.Date;
-
-import jakarta.persistence.*;
 
 
 /**
@@ -61,7 +61,7 @@ public class AuditLog  {
      * Record Created Time
      */
     @Column(name = "createdTime", updatable=false, nullable = false)
-    private java.sql.Timestamp createdTime;
+    private Timestamp createdTime;
 
     /**
      * Set the updated by user.
@@ -73,13 +73,13 @@ public class AuditLog  {
      * Set the Updated By Time by the user.
      */
     @Column(name = "updatedTime", nullable = false)
-    private java.sql.Timestamp updatedTime;
+    private Timestamp updatedTime;
 
     /**
      * Default System Audit Log
      */
     public AuditLog() {
-        // nothing to instantiate
+        // Nothing is there to instantiate
     }
 
     /**
@@ -108,7 +108,7 @@ public class AuditLog  {
      *
      * @return Timestamp
      */
-    public java.sql.Timestamp getCreatedTime() {
+    public Timestamp getCreatedTime() {
         return createdTime;
     }
 
@@ -126,7 +126,7 @@ public class AuditLog  {
      *
      * @return Timestamp
      */
-    public java.sql.Timestamp getUpdatedTime() {
+    public Timestamp getUpdatedTime() {
         return updatedTime;
     }
 

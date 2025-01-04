@@ -34,7 +34,7 @@ import io.fusion.air.microservice.domain.exceptions.AuthorizationException;
  *
  * @author: Araf Karsh Hamid
  * @version: 0.1
- * @date: 2024-12-18T4:27 PM
+ * @date: 2024-12-18T4:27 PM
  */
 public interface UserService {
 
