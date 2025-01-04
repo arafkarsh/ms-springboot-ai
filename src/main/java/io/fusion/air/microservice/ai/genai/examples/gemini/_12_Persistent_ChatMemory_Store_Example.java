@@ -35,52 +35,52 @@ import io.fusion.air.microservice.ai.genai.utils.AiConstants;
  */
 public class _12_Persistent_ChatMemory_Store_Example {
 
-    public static Assistant setupContext(ChatLanguageModel model) {
+    public static Assistant setupContext(ChatLanguageModel geminiChatModel) {
         // Create Persistent Store
         ChatMemoryFileStore store = new ChatMemoryFileStore();
         // Create Chat Memory Provider with the Store
-        ChatMemoryProvider chatMemoryProvider = memoryId -> MessageWindowChatMemory.builder()
+        ChatMemoryProvider chatMemoryProviderGemini = memoryId -> MessageWindowChatMemory.builder()
                 .id(memoryId)
                 .maxMessages(10)
                 .chatMemoryStore(store)
                 .build();
         // Create the Ai Assistant with model and Chat Memory Provider
         return AiServices.builder(Assistant.class)
-                .chatLanguageModel(model)
-                .chatMemoryProvider(chatMemoryProvider)
+                .chatLanguageModel(geminiChatModel)
+                .chatMemoryProvider(chatMemoryProviderGemini)
                 .build();
     }
 
-    public static void persistInitialData(Assistant assistant) {
+    public static void persistInitialData(Assistant assistantGemini) {
         String request1 = "UUID-1 >> Hello, my name is John Sam Doe";
-        String response1 = assistant.chat("UUID-1", request1);
+        String response1 = assistantGemini.chat("UUID-1", request1);
         AiBeans.printResult(request1, response1);
 
         String request2 = "UUID-2, >> Hello, my name is Jane Daisy Doe";
-        String response2 = assistant.chat("UUID-2", request2);
+        String response2 = assistantGemini.chat("UUID-2", request2);
         AiBeans.printResult(request2, response2);
     }
 
-    public static void testThePersistedData(Assistant assistant) {
+    public static void testThePersistedData(Assistant assistantGemini) {
         String request3 = "What is my name?";
-        String response3 = assistant.chat("UUID-1", "UUID-1 >> "+request3);
+        String response3 = assistantGemini.chat("UUID-1", "UUID-1 >> "+request3);
         AiBeans.printResult("UUID-1 >> "+request3, response3);
 
-        String response4 = assistant.chat("UUID-2", "UUID-2 >> "+request3);
+        String response4 = assistantGemini.chat("UUID-2", "UUID-2 >> "+request3);
         AiBeans.printResult("UUID-2 >> "+request3, response4);
     }
 
     public static void main(String[] args) {
         // Create Chat Language Model - Google Gemini 1.5 Pro
-        ChatLanguageModel model = AiBeans.getChatLanguageModelGoogle(AiConstants.GOOGLE_GEMINI_PRO);
+        ChatLanguageModel geminiChatModel = AiBeans.getChatLanguageModelGoogle(AiConstants.GOOGLE_GEMINI_PRO);
         AiBeans.printModelDetails(AiConstants.LLM_VERTEX, AiConstants.GOOGLE_GEMINI_PRO);
         // Setup the Context
-        Assistant assistant = setupContext(model);
+        Assistant assistantGemini = setupContext(geminiChatModel);
         // Initialize with Data
-        persistInitialData(assistant);
+        persistInitialData(assistantGemini);
         // To DownloadAllData the persisted Data.
         // Comment out the previous call "persistInitialData()"
         // UnComment the following call "testThePersistedData()"
-        testThePersistedData(assistant);
+        testThePersistedData(assistantGemini);
     }
 }

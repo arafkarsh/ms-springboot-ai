@@ -34,56 +34,56 @@ import io.fusion.air.microservice.ai.genai.utils.AiConstants;
  */
 public class _12_Persistent_ChatMemory_Store_Example {
 
-    public static Assistant setupContext(ChatLanguageModel model) {
+    public static Assistant setupContext(ChatLanguageModel anthropicChatModel) {
         // Create Persistent Store
         ChatMemoryFileStore store = new ChatMemoryFileStore();
         // Create Chat Memory Provider with the Store
-        ChatMemoryProvider chatMemoryProvider = memoryId -> MessageWindowChatMemory.builder()
+        ChatMemoryProvider chatMemoryProviderAnthropic = memoryId -> MessageWindowChatMemory.builder()
                 .id(memoryId)
                 .maxMessages(10)
                 .chatMemoryStore(store)
                 .build();
         // Create the Ai Assistant with model and Chat Memory Provider
         return AiServices.builder(Assistant.class)
-                .chatLanguageModel(model)
-                .chatMemoryProvider(chatMemoryProvider)
+                .chatLanguageModel(anthropicChatModel)
+                .chatMemoryProvider(chatMemoryProviderAnthropic)
                 .build();
     }
 
-    public static void persistInitialData(Assistant assistant) {
+    public static void persistInitialData(Assistant assistantAnthropic) {
         String request1 = "UUID-1 >> Hello, my name is John Sam Doe";
-        String response1 = assistant.chat("UUID-1", request1);
+        String response1 = assistantAnthropic.chat("UUID-1", request1);
         AiBeans.printResult(request1, response1);
         AiBeans.sleep(55);
 
         String request2 = "UUID-2, >> Hello, my name is Jane Daisy Doe";
-        String response2 = assistant.chat("UUID-2", request2);
+        String response2 = assistantAnthropic.chat("UUID-2", request2);
         AiBeans.printResult(request2, response2);
         AiBeans.sleep(55);
     }
 
-    public static void testThePersistedData(Assistant assistant) {
+    public static void testThePersistedData(Assistant assistantAnthropic) {
         String request3 = "What is my name?";
-        String response3 = assistant.chat("UUID-1", "UUID-1 >> "+request3);
+        String response3 = assistantAnthropic.chat("UUID-1", "UUID-1 >> "+request3);
         AiBeans.printResult("UUID-1 >> "+request3, response3);
         AiBeans.sleep(55);
 
-        String response4 = assistant.chat("UUID-2", "UUID-2 >> "+request3);
+        String response4 = assistantAnthropic.chat("UUID-2", "UUID-2 >> "+request3);
         AiBeans.printResult("UUID-2 >> "+request3, response4);
         AiBeans.sleep(55);
     }
 
     public static void main(String[] args) {
         // Create Chat Language Model - Anthropic Claude 3 Haiku
-        ChatLanguageModel model = AiBeans.getChatLanguageModelAnthropic(AiConstants.ANTHROPIC_CLAUDE_3_HAIKU);
+        ChatLanguageModel anthropicChatModel = AiBeans.getChatLanguageModelAnthropic(AiConstants.ANTHROPIC_CLAUDE_3_HAIKU);
         // Create Ai Assistant
-        Assistant assistant = setupContext(model);
+        Assistant assistantAnthropic = setupContext(anthropicChatModel);
         AiBeans.printModelDetails(AiConstants.LLM_ANTHROPIC, AiConstants.ANTHROPIC_CLAUDE_3_HAIKU);
         // Initialize with Data
-        persistInitialData(assistant);
+        persistInitialData(assistantAnthropic);
         // To DownloadAllData the persisted Data.
         // Comment out the previous call "persistInitialData()"
         // UnComment the following call "testThePersistedData()"
-        testThePersistedData(assistant);
+        testThePersistedData(assistantAnthropic);
     }
 }
