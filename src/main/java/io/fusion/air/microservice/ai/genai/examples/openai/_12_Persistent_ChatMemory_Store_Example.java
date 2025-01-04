@@ -36,12 +36,12 @@ import io.fusion.air.microservice.utils.Std;
  */
 public class _12_Persistent_ChatMemory_Store_Example {
 
-    public static Assistant setupContext(ChatLanguageModel model ) {
+    public static Assistant setupContext(ChatLanguageModel openAiChatModel ) {
         Std.println("Setup in Progress.... ");
         // Create a File-based Persistent Store.
         ChatMemoryFileStore chatFileStore = new ChatMemoryFileStore();
         // Create Chat Memory Provider with the Persistent Store
-        ChatMemoryProvider chatMemoryProvider = memoryId -> MessageWindowChatMemory.builder()
+        ChatMemoryProvider chatMemoryProviderOpenAI = memoryId -> MessageWindowChatMemory.builder()
                 .id(memoryId)
                 .maxMessages(30)
                 // Currently MapDB Store saving data into a File System.
@@ -49,41 +49,41 @@ public class _12_Persistent_ChatMemory_Store_Example {
                 .chatMemoryStore(chatFileStore)
                 .build();
         // Create the Ai Assistant with model and Chat Memory Provider
-        Assistant assistant = AiServices.builder(Assistant.class)
-                .chatLanguageModel(model)
-                .chatMemoryProvider(chatMemoryProvider)
+        Assistant assistantOpenAI = AiServices.builder(Assistant.class)
+                .chatLanguageModel(openAiChatModel)
+                .chatMemoryProvider(chatMemoryProviderOpenAI)
                 .build();
         Std.println("Setup Completed...");
-        return assistant;
+        return assistantOpenAI;
     }
 
-    public static void persistInitialData(Assistant assistant) {
+    public static void persistInitialData(Assistant assistantOpenAi) {
         String request1 = "UUID-1 >> Hello, my name is John Sam Doe";
-        String response1 = assistant.chat("UUID-1", request1);
+        String response1 = assistantOpenAi.chat("UUID-1", request1);
         AiBeans.printResult(request1, response1);
 
         String request2 = "UUID-2, >> Hello, my name is Jane Daisy Doe";
-        String response2 = assistant.chat("UUID-2", request2);
+        String response2 = assistantOpenAi.chat("UUID-2", request2);
         AiBeans.printResult(request2, response2);
     }
 
-    public static void testThePersistedData(Assistant assistant) {
+    public static void testThePersistedData(Assistant assistantOpenAi) {
         String request3 = "What is my name?";
-        String response3 = assistant.chat("UUID-1", "UUID-1 >> "+request3);
+        String response3 = assistantOpenAi.chat("UUID-1", "UUID-1 >> "+request3);
         AiBeans.printResult("UUID-1 >> "+request3, response3);
 
-        String response4 = assistant.chat("UUID-2", "UUID-2 >> "+request3);
+        String response4 = assistantOpenAi.chat("UUID-2", "UUID-2 >> "+request3);
         AiBeans.printResult("UUID-2 >> "+request3, response4);
     }
 
     public static void main(String[] args) {
         // Create Chat Language Model - Open AI GPT 4o
-        ChatLanguageModel model = AiBeans.getChatLanguageModelOpenAi(AiConstants.GPT_4o);
+        ChatLanguageModel openAiChatModel = AiBeans.getChatLanguageModelOpenAi(AiConstants.GPT_4o);
         AiBeans.printModelDetails(AiConstants.LLM_OPENAI, AiConstants.GPT_4o);
         // Setup the Context
-        Assistant assistant = setupContext(model);
+        Assistant assistantOpenAi = setupContext(openAiChatModel);
         // Initialize with Data
-        persistInitialData(assistant);
+        persistInitialData(assistantOpenAi);
         // To DownloadAllData the persisted Data.
         // Comment out the previous call "persistInitialData()"
         // UnComment the following call "testThePersistedData()"

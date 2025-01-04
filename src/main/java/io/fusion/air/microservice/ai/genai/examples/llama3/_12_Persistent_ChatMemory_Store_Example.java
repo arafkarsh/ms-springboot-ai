@@ -35,52 +35,52 @@ import io.fusion.air.microservice.ai.genai.utils.AiConstants;
  */
 public class _12_Persistent_ChatMemory_Store_Example {
 
-    public static Assistant setupContext(ChatLanguageModel model) {
+    public static Assistant setupContext(ChatLanguageModel llamaChatModel) {
         // Create Persistent Store
         ChatMemoryFileStore store = new ChatMemoryFileStore();
         // Create Chat Memory Provider with the Store
-        ChatMemoryProvider chatMemoryProvider = memoryId -> MessageWindowChatMemory.builder()
+        ChatMemoryProvider chatMemoryProviderLlama = memoryId -> MessageWindowChatMemory.builder()
                 .id(memoryId)
                 .maxMessages(10)
                 .chatMemoryStore(store)
                 .build();
         // Create the Ai Assistant with model and Chat Memory Provider
         return AiServices.builder(Assistant.class)
-                .chatLanguageModel(model)
-                .chatMemoryProvider(chatMemoryProvider)
+                .chatLanguageModel(llamaChatModel)
+                .chatMemoryProvider(chatMemoryProviderLlama)
                 .build();
     }
 
-    public static void persistInitialData(Assistant assistant) {
+    public static void persistInitialData(Assistant assistantLlama) {
         String request1 = "UUID-1 >> Hello, my name is John Sam Doe";
-        String response1 = assistant.chat("UUID-1", request1);
+        String response1 = assistantLlama.chat("UUID-1", request1);
         AiBeans.printResult(request1, response1);
 
         String request2 = "UUID-2, >> Hello, my name is Jane Daisy Doe";
-        String response2 = assistant.chat("UUID-2", request2);
+        String response2 = assistantLlama.chat("UUID-2", request2);
         AiBeans.printResult(request2, response2);
     }
 
-    public static void testThePersistedData(Assistant assistant) {
+    public static void testThePersistedData(Assistant assistantLlama) {
         String request3 = "What is my name?";
-        String response3 = assistant.chat("UUID-1", "UUID-1 >> "+request3);
+        String response3 = assistantLlama.chat("UUID-1", "UUID-1 >> "+request3);
         AiBeans.printResult("UUID-1 >> "+request3, response3);
 
-        String response4 = assistant.chat("UUID-2", "UUID-2 >> "+request3);
+        String response4 = assistantLlama.chat("UUID-2", "UUID-2 >> "+request3);
         AiBeans.printResult("UUID-2 >> "+request3, response4);
     }
 
     public static void main(String[] args) {
         // Create Chat Language Model llama3
-        ChatLanguageModel model = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_LLAMA3);
+        ChatLanguageModel llamaChatModel = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_LLAMA3);
         AiBeans.printModelDetails(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_LLAMA3);
         // Create Assistant - Setup the Context
-        Assistant assistant = setupContext(model);
+        Assistant assistantLlama = setupContext(llamaChatModel);
         // Initialize with Data
-        persistInitialData(assistant);
+        persistInitialData(assistantLlama);
         // To DownloadAllData the persisted Data.
         // Comment out the previous call "persistInitialData()"
         // UnComment the following call "testThePersistedData()"
-        testThePersistedData(assistant);
+        testThePersistedData(assistantLlama);
     }
 }
