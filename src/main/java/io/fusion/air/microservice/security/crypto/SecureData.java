@@ -47,15 +47,6 @@ public class SecureData {
     private static final String DEFAULT_ALGORITHM   = Algorithms.AES_CBC_PKCS_5_PADDING;
     private static final String DEFAULT_MD_ALGO     = Algorithms.SHA_512;
 
-    /**
-     * Create Secret Key Specs with AES Algorithm
-     * @param secret
-     * @param mdAlgo
-     * @return
-     */
-    private static SecretKeyData createSecretKeySpec(String secret, String mdAlgo) {
-        return createSecretKeySpec( secret,  mdAlgo, Algorithms.AES);
-    }
 
     /**
      * Create Secret Key Specs
