@@ -47,47 +47,47 @@ import static java.util.Arrays.asList;
  */
 public class _11_Data_Extractor_Example {
 
-    public static void numberExtractor(DataExtractorAssistant extractor ) {
+    public static void numberExtractor(DataExtractorAssistant phi3DataExtractor ) {
         // Extract Numbers
         String request = """
                     After countless millennia of computation, the supercomputer Deep Thought 
                     finally announced that the answer to the ultimate question of life, the 
                     universe, and everything was forty two.""";
 
-        int intNumber = extractor.extractInt(request);
+        int intNumber = phi3DataExtractor.extractInt(request);
         AiBeans.printResult(request, "Number = "+intNumber);
     }
 
-    public static void dateTimeExtractor(DataExtractorAssistant extractor ) {
+    public static void dateTimeExtractor(DataExtractorAssistant phi3DataExtractor ) {
         // Extract Date and Time
         StringBuilder sb = new StringBuilder();
         String request = """
                     The tranquility pervaded the evening of 1968, just fifteen minutes 
                     shy of midnight, following the celebrations of Independence Day.""";
 
-        LocalDate date = extractor.extractDateFrom(request);
+        LocalDate date = phi3DataExtractor.extractDateFrom(request);
         sb.append("Date      = ").append(date).append("\n");
-        LocalTime time = extractor.extractTimeFrom(request);
+        LocalTime time = phi3DataExtractor.extractTimeFrom(request);
         sb.append("Time      = ").append(time).append("\n");
-        LocalDateTime dateTime = extractor.extractDateTimeFrom(request);
+        LocalDateTime dateTime = phi3DataExtractor.extractDateTimeFrom(request);
         sb.append("DateTime = ").append(dateTime);
 
         AiBeans.printResult(request, sb.toString());
     }
 
-    public static void pojoExtractor(DataExtractorAssistant extractor ) {
+    public static void pojoExtractor(DataExtractorAssistant phi3DataExtractor ) {
         // POJO Person Extractor
         String request = """
                 In 1968, amidst the fading echoes of Indian Independence Day, 
                 a child named John arrived under the calm evening sky. 
                 This newborn, bearing the surname Doe, marked the start of a new journey.""";
 
-        Person person = extractor.extractPersonFrom(request);
+        Person person = phi3DataExtractor.extractPersonFrom(request);
         AiBeans.printResult(request, person.toString());
     }
 
-    public static void complexPojoExtractor(ChatLanguageModel model) {
-        ChefAssistant chefAssistant = AiServices.create(ChefAssistant.class, model);
+    public static void complexPojoExtractor(ChatLanguageModel phi3ChatModel) {
+        ChefAssistant chefAssistant = AiServices.create(ChefAssistant.class, phi3ChatModel);
         Recipe recipe = chefAssistant.createRecipeFrom("cucumber", "tomato", "feta", "onion", "olives", "lemon");
         Std.println(recipe);
 
@@ -100,34 +100,34 @@ public class _11_Data_Extractor_Example {
 
     public static void main(String[] args) {
         // Create Chat Language Model Microsoft PHI - 3
-        ChatLanguageModel model = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_PHI_3);
+        ChatLanguageModel phi3Model = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_PHI_3);
         AiBeans.printModelDetails(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_PHI_3);
-        DataExtractorAssistant extractor = AiServices.create(DataExtractorAssistant.class, model);
+        DataExtractorAssistant phi3DataExtractor = AiServices.create(DataExtractorAssistant.class, phi3Model);
         try {
             Std.println("Number Extractor =================================================");
             // Extract Numbers
-            numberExtractor(extractor);
+            numberExtractor(phi3DataExtractor);
         } catch (Exception e) {
             Std.println(ERROR_MESSAGE+e.getMessage());
         }
         try {
             Std.println("Date & Time Extractor =============================================");
             // Extract Date and Time
-            dateTimeExtractor(extractor);
+            dateTimeExtractor(phi3DataExtractor);
         } catch (Exception e) {
             Std.println(ERROR_MESSAGE+e.getMessage());
         }
         try {
             Std.println("Pojo Extractor ====================================================");
             // POJO Person Extractor
-             pojoExtractor(extractor);
+             pojoExtractor(phi3DataExtractor);
         } catch (Exception e) {
             Std.println(ERROR_MESSAGE+e.getMessage());
         }
         try {
             Std.println("Complex Pogo Extractor ============================================");
             // Complex Pojo Extractor with Descriptions (rules)
-            complexPojoExtractor(model);
+            complexPojoExtractor(phi3Model);
         } catch (Exception e) {
             Std.println(ERROR_MESSAGE+e.getMessage());
         }
