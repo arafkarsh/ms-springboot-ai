@@ -39,50 +39,50 @@ public class _01_Hello_World {
      */
     public static void main(String[] args) {
         // Create Chat Language Model - Open AI GPT 4o
-        ChatLanguageModel model = AiBeans.getChatLanguageModelOpenAi(AiConstants.GPT_4o);
+        ChatLanguageModel openAiChatModel = AiBeans.getChatLanguageModelOpenAi(AiConstants.GPT_4o);
 
-        helloWorldWithOpenAI(model);
-        conversationChatWithOpenAI(model);
-        conversationChatWithMemoryWithOpenAI(model);
+        helloWorldWithOpenAI(openAiChatModel);
+        conversationChatWithOpenAI(openAiChatModel);
+        conversationChatWithMemoryWithOpenAI(openAiChatModel);
     }
 
     /**
      * Simple Hello World
-     * @param model
+     * @param openAiChatModel
      */
-    public static void helloWorldWithOpenAI(ChatLanguageModel model) {
+    public static void helloWorldWithOpenAI(ChatLanguageModel openAiChatModel) {
         // Start interacting
         String request = "Hello My Space... Open AI ChatGPT 4o ";
-        String response = model.generate(request);
+        String response = openAiChatModel.generate(request);
         AiBeans.printModelDetails(AiConstants.LLM_OPENAI, AiConstants.GPT_4o);
         AiBeans.printResult(request, response);
     }
 
     /**
      * Conversation Chain
-     * @param model
+     * @param openAiChatModel
      */
-    public static void conversationChatWithOpenAI(ChatLanguageModel model) {
-        ConversationalChain chain = ConversationalChain.builder()
-                .chatLanguageModel(model)
+    public static void conversationChatWithOpenAI(ChatLanguageModel openAiChatModel) {
+        ConversationalChain chainOpenAi = ConversationalChain.builder()
+                .chatLanguageModel(openAiChatModel)
                 // .chatMemory() // you can override default chat memory
                 .build();
         String request1 = "Hello, my name is karsh";
-        String response1 = chain.execute(request1);
+        String response1 = chainOpenAi.execute(request1);
         AiBeans.printResult(request1, response1);
 
 
         String request2 = "What is my name?";
-        String response2 = chain.execute(request2);
+        String response2 = chainOpenAi.execute(request2);
         AiBeans.printResult(request2, response2);
     }
 
     /**
      * Conversation with Memory
-     * @param model
+     * @param openAiChatModel
      */
-    public static void conversationChatWithMemoryWithOpenAI(ChatLanguageModel model) {
-        ChatMemory chatMemory = TokenWindowChatMemory.withMaxTokens(300,
+    public static void conversationChatWithMemoryWithOpenAI(ChatLanguageModel openAiChatModel) {
+        ChatMemory chatMemoryOpenAi = TokenWindowChatMemory.withMaxTokens(300,
                 new OpenAiTokenizer(AiConstants.GPT_4o));
 
         // You have full control over the chat memory.
@@ -90,15 +90,15 @@ public class _01_Hello_World {
         // (e.g. you might not want to store few-shot examples to save on tokens).
         // You can process/modify the message before saving if required.
         String request1 = "Hello, my name is karsh";
-        chatMemory.add(userMessage(request1));
-        AiMessage answer1 = model.generate(chatMemory.messages()).content();
-        chatMemory.add(answer1);
+        chatMemoryOpenAi.add(userMessage(request1));
+        AiMessage answer1 = openAiChatModel.generate(chatMemoryOpenAi.messages()).content();
+        chatMemoryOpenAi.add(answer1);
         AiBeans.printResult(request1, answer1.text());
 
         String request2 = "What is my name?";
-        chatMemory.add(userMessage(request2));
-        AiMessage answer2 = model.generate(chatMemory.messages()).content();
-        chatMemory.add(answer2);
+        chatMemoryOpenAi.add(userMessage(request2));
+        AiMessage answer2 = openAiChatModel.generate(chatMemoryOpenAi.messages()).content();
+        chatMemoryOpenAi.add(answer2);
         AiBeans.printResult(request2, answer2.text());
     }
 }

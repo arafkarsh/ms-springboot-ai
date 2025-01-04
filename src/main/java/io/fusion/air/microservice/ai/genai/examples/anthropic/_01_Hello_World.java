@@ -39,50 +39,50 @@ public class _01_Hello_World {
      */
     public static void main(String[] args) {
         // Create Chat Language Model - Anthropic Claude 3 Haiku
-        ChatLanguageModel model = AiBeans.getChatLanguageModelAnthropic(AiConstants.ANTHROPIC_CLAUDE_3_HAIKU);
+        ChatLanguageModel anthropicChatModel = AiBeans.getChatLanguageModelAnthropic(AiConstants.ANTHROPIC_CLAUDE_3_HAIKU);
 
-        helloWorldWithAnthropic(model);
-        conversationChatWithAnthropic(model);
-        conversationChatWithMemoryWithAnthropic(model);
+        helloWorldWithAnthropic(anthropicChatModel);
+        conversationChatWithAnthropic(anthropicChatModel);
+        conversationChatWithMemoryWithAnthropic(anthropicChatModel);
     }
 
     /**
      * Simple Hello World
-     * @param model
+     * @param anthropicChatModel
      */
-    public static void helloWorldWithAnthropic(ChatLanguageModel model) {
+    public static void helloWorldWithAnthropic(ChatLanguageModel anthropicChatModel) {
         // Start interacting
         String request = "Hello My Space... Anthropic Claude 3 Haiku ";
-        String response = model.generate(request);
+        String response = anthropicChatModel.generate(request);
         AiBeans.printModelDetails(AiConstants.LLM_ANTHROPIC, AiConstants.ANTHROPIC_CLAUDE_3_HAIKU);
         AiBeans.printResult(request, response);
     }
 
     /**
      * Conversation Chain
-     * @param model
+     * @param anthropicChatModel
      */
-    public static void conversationChatWithAnthropic(ChatLanguageModel model) {
-        ConversationalChain chain = ConversationalChain.builder()
-                .chatLanguageModel(model)
+    public static void conversationChatWithAnthropic(ChatLanguageModel anthropicChatModel) {
+        ConversationalChain chainAnthropic = ConversationalChain.builder()
+                .chatLanguageModel(anthropicChatModel)
                 // .chatMemory() // you can override default chat memory
                 .build();
         String request1 = "Hello, my name is karsh";
-        String response1 = chain.execute(request1);
+        String response1 = chainAnthropic.execute(request1);
         AiBeans.printResult(request1, response1);
 
 
         String request2 = "What is my name?";
-        String response2 = chain.execute(request2);
+        String response2 = chainAnthropic.execute(request2);
         AiBeans.printResult(request2, response2);
     }
 
     /**
      * Conversation with Memory
-     * @param model
+     * @param anthropicChatModel
      */
-    public static void conversationChatWithMemoryWithAnthropic(ChatLanguageModel model) {
-        ChatMemory chatMemory = TokenWindowChatMemory.withMaxTokens(300,
+    public static void conversationChatWithMemoryWithAnthropic(ChatLanguageModel anthropicChatModel) {
+        ChatMemory chatMemoryAnthropic = TokenWindowChatMemory.withMaxTokens(300,
                 new OpenAiTokenizer(AiConstants.GPT_4o));
 
         // You have full control over the chat memory.
@@ -90,15 +90,15 @@ public class _01_Hello_World {
         // (e.g. you might not want to store few-shot examples to save on tokens).
         // You can process/modify the message before saving if required.
         String request1 = "Hello, my name is karsh";
-        chatMemory.add(userMessage(request1));
-        AiMessage answer1 = model.generate(chatMemory.messages()).content();
-        chatMemory.add(answer1);
+        chatMemoryAnthropic.add(userMessage(request1));
+        AiMessage answer1 = anthropicChatModel.generate(chatMemoryAnthropic.messages()).content();
+        chatMemoryAnthropic.add(answer1);
         AiBeans.printResult(request1, answer1.text());
 
         String request2 = "What is my name?";
-        chatMemory.add(userMessage(request2));
-        AiMessage answer2 = model.generate(chatMemory.messages()).content();
-        chatMemory.add(answer2);
+        chatMemoryAnthropic.add(userMessage(request2));
+        AiMessage answer2 = anthropicChatModel.generate(chatMemoryAnthropic.messages()).content();
+        chatMemoryAnthropic.add(answer2);
         AiBeans.printResult(request2, answer2.text());
     }
 }
