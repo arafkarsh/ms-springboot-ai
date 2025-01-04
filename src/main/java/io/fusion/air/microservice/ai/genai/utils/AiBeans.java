@@ -29,7 +29,9 @@ import dev.langchain4j.service.AiServices;
 // Custom
 import io.fusion.air.microservice.ai.genai.core.assistants.HAL9000Assistant;
 // Spring
+import io.fusion.air.microservice.server.config.AiConfig;
 import io.fusion.air.microservice.utils.Std;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -45,6 +47,28 @@ import static java.time.Duration.ofSeconds;
  */
 @Configuration
 public class AiBeans {
+
+    private final AiConfig aiConfig;
+
+    public AiBeans() {
+        aiConfig = new AiConfig();
+    }
+
+    /**
+     * Default Constructor
+     */
+    @Autowired
+    public AiBeans(AiConfig aiConfig) {
+        this.aiConfig = aiConfig;
+    }
+
+    /**
+     * Returns AI Configuration
+     * @return
+     */
+    public AiConfig getAiConfig() {
+        return aiConfig;
+    }
 
     /**
      * Get the default Language Model (OpenAPI ChatGPT 4o)
@@ -154,7 +178,7 @@ public class AiBeans {
      * Returns Chat Language Model based on ChatGPT 3.5, 4.0, 4o (Omni)
      * @return
      */
-    @Bean(name = "ChatLanguageModelGPT")
+    @Bean(name = "chatLanguageModelGPT")
     public ChatLanguageModel createChatLanguageModelOpenAi() {
         return createChatLanguageModelOpenAi(AiConstants.getOpenAIDefaultModel(), false, false);
     }
@@ -202,7 +226,7 @@ public class AiBeans {
      * 1. Llama 3
      * @return
      */
-    @Bean(name = "ChatLanguageModelOllama")
+    @Bean(name = "chatLanguageModelOllama")
     public ChatLanguageModel createChatLanguageModelLlama() {
         return createChatLanguageModelLlama( AiConstants.OLLAMA_LLAMA3);
     }
@@ -236,7 +260,7 @@ public class AiBeans {
      *
      * @return
      */
-    @Bean(name = "ChatLanguageModelAnthropic")
+    @Bean(name = "chatLanguageModelAnthropic")
     public ChatLanguageModel createChatLanguageModelAnthropic() {
         return createChatLanguageModelAnthropic( AiConstants.ANTHROPIC_CLAUDE_3_HAIKU);
     }
@@ -266,7 +290,7 @@ public class AiBeans {
      *
      * @return
      */
-    @Bean(name = "ChatLanguageModelGoogle")
+    @Bean(name = "chatLanguageModelGoogle")
     public ChatLanguageModel createChatLanguageModelGoogle() {
         return createChatLanguageModelGoogle( AiConstants.GOOGLE_GEMINI_PRO);
     }
@@ -338,7 +362,7 @@ public class AiBeans {
      * Returns Open API Moderation Model
      * @return
      */
-    @Bean(name = "OpenAPIModerationModel")
+    @Bean(name = "openAPIModerationModel")
     public OpenAiModerationModel createOpenAPIModerationModel() {
         return OpenAiModerationModel.withApiKey(AiConstants.OPENAI_API_KEY);
     }
@@ -382,7 +406,7 @@ public class AiBeans {
     /**
      * This chat memory will be used by an {@link HAL9000Assistant}
      */
-    @Bean(name = "SimpleChatMemory")
+    @Bean(name = "simpleChatMemory")
     public ChatMemory chatMemory() {
         return MessageWindowChatMemory.withMaxMessages(20);
     }

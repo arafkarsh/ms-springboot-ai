@@ -35,22 +35,22 @@ public class _02_Complex_World {
         ChatLanguageModel model = AiBeans.getChatLanguageModelAnthropic(AiConstants.ANTHROPIC_CLAUDE_3_HAIKU);
 
         // Create the Ai Assistant
-        HAL9000Assistant hal9k = new AiBeans().createHAL9000(model);
+        HAL9000Assistant hal9KAnthropic = new AiBeans().createHAL9000(model);
 
         AiBeans.printModelDetails(AiConstants.LLM_ANTHROPIC, AiConstants.ANTHROPIC_CLAUDE_3_HAIKU);
         // Run the DownloadAllData Cases
-        complexWorld1(hal9k);
-        complexWorld2(hal9k);
-        complexWorld3(hal9k);
+        complexWorld1UsingAnthropic(hal9KAnthropic);
+        complexWorld2UsingAnthropic(hal9KAnthropic);
+        complexWorld3UsingAnthropic(hal9KAnthropic);
     }
 
     /**
      * Example 1
      * @param hal9K
      */
-    public static void complexWorld1(HAL9000Assistant hal9K) {
-        interact(hal9K, "What is the square root of 144233377?");
-        interact(hal9K, "Capitalize every third letter except the sixth letter: abcdefghjiklmnop");
+    public static void complexWorld1UsingAnthropic(HAL9000Assistant hal9K) {
+        interactUsingAnthropic(hal9K, "What is the square root of 144233377?");
+        interactUsingAnthropic(hal9K, "Capitalize every third letter except the sixth letter: abcdefghjiklmnop");
         AiBeans.sleep();
     }
 
@@ -58,10 +58,10 @@ public class _02_Complex_World {
      * Example 2
      * @param hal9K
      */
-    public static void complexWorld2(HAL9000Assistant hal9K) {
-        interact(hal9K, "What are the hours between 06:00 on 7 Feb 1970 and 11:00 on 02 Jun 1980?");
-        interact(hal9K, "What is the sum of all the digits in the previous question? Is that a Prime Number?");
-        interact(hal9K, "What are the hours between 11:00 on 2 Jun 1980 and 12:00 on 11 Mar 2024?");
+    public static void complexWorld2UsingAnthropic(HAL9000Assistant hal9K) {
+        interactUsingAnthropic(hal9K, "What are the hours between 06:00 on 7 Feb 1970 and 11:00 on 02 Jun 1980?");
+        interactUsingAnthropic(hal9K, "What is the sum of all the digits in the previous question? Is that a Prime Number?");
+        interactUsingAnthropic(hal9K, "What are the hours between 11:00 on 2 Jun 1980 and 12:00 on 11 Mar 2024?");
         validateCalc();
         Std.println("--------------------------------------------------------------");
         AiBeans.sleep();
@@ -71,8 +71,8 @@ public class _02_Complex_World {
      * Example 3
      * @param hal9K
      */
-    public static void complexWorld3(HAL9000Assistant hal9K) {
-        interact(hal9K, "Explain French Revolution in details with critical events.");
+    public static void complexWorld3UsingAnthropic(HAL9000Assistant hal9K) {
+        interactUsingAnthropic(hal9K, "Explain French Revolution in details with critical events.");
     }
 
     /**
@@ -80,7 +80,7 @@ public class _02_Complex_World {
      * @param hal9K
      * @param userMessage
      */
-    private static void interact(HAL9000Assistant hal9K, String userMessage) {
+    private static void interactUsingAnthropic(HAL9000Assistant hal9K, String userMessage) {
         Std.println("[Human]: " + userMessage);
         String response = hal9K.chat(userMessage);
         Std.println("[HAL9K]: " + response);
