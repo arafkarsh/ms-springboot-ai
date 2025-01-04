@@ -1,5 +1,5 @@
 # AI/ML & Gen Ai -  Langchain4J & Deep Learning 4J
-## Java 23, Springboot 3.3.4 Examples
+## Java 23, Springboot 3.4.1 Examples
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=arafkarsh_ms-springboot-324-ai&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=arafkarsh_ms-springboot-324-ai)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=arafkarsh_ms-springboot-324-ai&metric=bugs)](https://sonarcloud.io/summary/new_code?id=arafkarsh_ms-springboot-324-ai)
@@ -7,7 +7,7 @@
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=arafkarsh_ms-springboot-324-ai&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=arafkarsh_ms-springboot-324-ai)
 
 - Java 23
-- SpringBoot 3.3.4
+- SpringBoot 3.4.1
 - LangChain4J 0.36.0
 - Deep Learning 4J 1.0.0-M2.1
 
@@ -250,7 +250,7 @@ Read more... <a href="https://docs.langchain4j.dev/intro">LangChain4J Introducti
 ### Pre-Requisites
 
 1. Java 23
-2. SpringBoot 3.3.4
+2. SpringBoot 3.4.1
 3. LangChain4J 0.30.0
 4. Jakarta EE 10 (jakarta.servlet.*, jakarta.persistence.*, javax.validation.*)
 
