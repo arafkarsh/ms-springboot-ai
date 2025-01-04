@@ -1,4 +1,4 @@
-# Gen Ai - Springboot / Langchain4J Examples
+# AI/ML & Gen Ai - Springboot / Langchain4J & Deep Learning 4J Examples
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=arafkarsh_ms-springboot-324-ai&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=arafkarsh_ms-springboot-324-ai)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=arafkarsh_ms-springboot-324-ai&metric=bugs)](https://sonarcloud.io/summary/new_code?id=arafkarsh_ms-springboot-324-ai)
@@ -8,6 +8,7 @@
 - Java 23
 - SpringBoot 3.3.4
 - LangChain4J 0.36.0
+- Deep Learning 4J 1.0.0-M2.1
 
 Generative AI refers to a subset of artificial intelligence that can generate new content based 
 on input data. This encompasses models that can create text, images, music, and even videos. 

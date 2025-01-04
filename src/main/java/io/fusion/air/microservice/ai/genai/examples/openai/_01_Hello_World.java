@@ -34,12 +34,25 @@ import io.fusion.air.microservice.ai.genai.utils.AiConstants;
 public class _01_Hello_World {
 
     /**
+     * DownloadAllData the Chat Language Model
+     * @param args
+     */
+    public static void main(String[] args) {
+        // Create Chat Language Model - Open AI GPT 4o
+        ChatLanguageModel model = AiBeans.getChatLanguageModelOpenAi(AiConstants.GPT_4o);
+
+        helloWorldWithOpenAI(model);
+        conversationChatWithOpenAI(model);
+        conversationChatWithMemoryWithOpenAI(model);
+    }
+
+    /**
      * Simple Hello World
      * @param model
      */
-    public static void helloWorld(ChatLanguageModel model) {
+    public static void helloWorldWithOpenAI(ChatLanguageModel model) {
         // Start interacting
-        String request = "Hello My Space...";
+        String request = "Hello My Space... Open AI ChatGPT 4o ";
         String response = model.generate(request);
         AiBeans.printModelDetails(AiConstants.LLM_OPENAI, AiConstants.GPT_4o);
         AiBeans.printResult(request, response);
@@ -49,7 +62,7 @@ public class _01_Hello_World {
      * Conversation Chain
      * @param model
      */
-    public static void conversationChat(ChatLanguageModel model) {
+    public static void conversationChatWithOpenAI(ChatLanguageModel model) {
         ConversationalChain chain = ConversationalChain.builder()
                 .chatLanguageModel(model)
                 // .chatMemory() // you can override default chat memory
@@ -68,7 +81,7 @@ public class _01_Hello_World {
      * Conversation with Memory
      * @param model
      */
-    public static void conversationChatWithMemory(ChatLanguageModel model) {
+    public static void conversationChatWithMemoryWithOpenAI(ChatLanguageModel model) {
         ChatMemory chatMemory = TokenWindowChatMemory.withMaxTokens(300,
                 new OpenAiTokenizer(AiConstants.GPT_4o));
 
@@ -87,18 +100,5 @@ public class _01_Hello_World {
         AiMessage answer2 = model.generate(chatMemory.messages()).content();
         chatMemory.add(answer2);
         AiBeans.printResult(request2, answer2.text());
-    }
-
-    /**
-     * DownloadAllData the Chat Language Model
-     * @param args
-     */
-    public static void main(String[] args) {
-        // Create Chat Language Model - Open AI GPT 4o
-        ChatLanguageModel model = AiBeans.getChatLanguageModelOpenAi(AiConstants.GPT_4o);
-
-        helloWorld(model);
-        conversationChat(model);
-        conversationChatWithMemory(model);
     }
 }
