@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 package io.fusion.air.microservice.ai.genai.utils;
-
+// LangChain
 import dev.langchain4j.memory.ChatMemory;
 import dev.langchain4j.memory.chat.MessageWindowChatMemory;
 import dev.langchain4j.model.chat.ChatLanguageModel;
@@ -33,19 +33,19 @@ import io.fusion.air.microservice.server.config.AiConfig;
 import io.fusion.air.microservice.utils.Std;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
+import org.springframework.stereotype.Component;
+// Java
 import java.time.Duration;
-
 import static java.time.Duration.ofSeconds;
 
 /**
  * Ai Beans
+ *
  * @author: Araf Karsh Hamid
  * @version:
  * @date:
  */
-@Configuration
+@Component
 public class AiBeans {
 
     private final AiConfig aiConfig;
@@ -416,6 +416,22 @@ public class AiBeans {
     // ==============================================================================================
 
     /**
+     * Extract the Model Name from ChatLanguageModel
+     * @param model
+     * @return
+     */
+    public static String getChatLanguageModelName(ChatLanguageModel model) {
+        try {
+            String[] p1 = model.toString().split("@");
+            String[] p2 = p1[0].split("\\.");
+            return p2[4];
+        } catch (Exception e) {
+            Std.println(e.getMessage());
+            return "Unable to Extract Model Name from > "+model;
+        }
+    }
+
+    /**
      * Print Model Details
      * @param llm
      * @param model
@@ -459,5 +475,13 @@ public class AiBeans {
             /* Clean up whatever needs to be handled before interrupting  */
             Thread.currentThread().interrupt();
         }
+    }
+
+    public static void main(String[] args) {
+        String test = "dev.langchain4j.model.ollama.OllamaChatModel@138b6bc5";
+        String[] p1 = test.split("@");
+        Std.println("L: "+p1[0]+" R: "+p1[1]);
+        String[] p2 = p1[0].split("\\.");
+        Std.println(p2[4]);
     }
 }

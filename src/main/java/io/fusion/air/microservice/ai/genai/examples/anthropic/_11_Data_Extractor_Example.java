@@ -47,32 +47,32 @@ import static java.util.Arrays.asList;
  */
 public class _11_Data_Extractor_Example {
 
-    public static void numberExtractor(DataExtractorAssistant extractor ) {
+    public static void numberExtractor(DataExtractorAssistant anthropicDataExtractor ) {
         // Extract Numbers
         String request = """
                     After countless millennia of computation, the supercomputer Deep Thought 
                     finally announced that the answer to the ultimate question of life, the 
                     universe, and everything was forty two.""";
 
-        int intNumber = extractor.extractInt(request);
+        int intNumber = anthropicDataExtractor.extractInt(request);
         AiBeans.printResult(request, "Number = "+intNumber);
         AiBeans.sleep(55);
     }
 
-    public static void dateTimeExtractor(DataExtractorAssistant extractor ) {
+    public static void dateTimeExtractor(DataExtractorAssistant anthropicDataExtractor ) {
         // Extract Date and Time
         StringBuilder sb = new StringBuilder();
         String request = """
                     The tranquility pervaded the evening of 1968, just fifteen minutes 
                     shy of midnight, following the celebrations of Independence Day.""";
 
-        LocalDate date = extractor.extractDateFrom(request);
+        LocalDate date = anthropicDataExtractor.extractDateFrom(request);
         AiBeans.sleep(55);
         sb.append("Date      = ").append(date).append("\n");
-        LocalTime time = extractor.extractTimeFrom(request);
+        LocalTime time = anthropicDataExtractor.extractTimeFrom(request);
         AiBeans.sleep(55);
         sb.append("Time      = ").append(time).append("\n");
-        LocalDateTime dateTime = extractor.extractDateTimeFrom(request);
+        LocalDateTime dateTime = anthropicDataExtractor.extractDateTimeFrom(request);
         sb.append("DateTime = ").append(dateTime);
 
         AiBeans.printResult(request, sb.toString());
@@ -80,20 +80,20 @@ public class _11_Data_Extractor_Example {
 
     }
 
-    public static void pojoExtractor(DataExtractorAssistant extractor ) {
+    public static void pojoExtractor(DataExtractorAssistant anthropicDataExtractor ) {
         // POJO Person Extractor
         String request = """
                 In 1968, amidst the fading echoes of Indian Independence Day, 
                 a child named John arrived under the calm evening sky. 
                 This newborn, bearing the surname Doe, marked the start of a new journey.""";
 
-        Person person = extractor.extractPersonFrom(request);
+        Person person = anthropicDataExtractor.extractPersonFrom(request);
         AiBeans.printResult(request, person.toString());
         AiBeans.sleep(55);
     }
 
-    public static void complexPojoExtractor(ChatLanguageModel model) {
-        ChefAssistant chefAssistant = AiServices.create(ChefAssistant.class, model);
+    public static void complexPojoExtractor(ChatLanguageModel anthropicChatModel) {
+        ChefAssistant chefAssistant = AiServices.create(ChefAssistant.class, anthropicChatModel);
         Recipe recipe = chefAssistant.createRecipeFrom("cucumber", "tomato", "feta", "onion", "olives", "lemon");
         Std.println(recipe);
         AiBeans.sleep(55);
@@ -108,35 +108,35 @@ public class _11_Data_Extractor_Example {
 
     public static void main(String[] args) {
         // Create Chat Language Model - Anthropic Claude 3 Haiku
-        ChatLanguageModel model = AiBeans.getChatLanguageModelAnthropic(AiConstants.ANTHROPIC_CLAUDE_3_HAIKU);
+        ChatLanguageModel modelAnthropic = AiBeans.getChatLanguageModelAnthropic(AiConstants.ANTHROPIC_CLAUDE_3_HAIKU);
         AiBeans.printModelDetails(AiConstants.LLM_ANTHROPIC, AiConstants.ANTHROPIC_CLAUDE_3_HAIKU);
         // Create Data Extractor
-        DataExtractorAssistant extractor = AiServices.create(DataExtractorAssistant.class, model);
+        DataExtractorAssistant anthropicDataExtractor = AiServices.create(DataExtractorAssistant.class, modelAnthropic);
         try {
             Std.println("Number Extractor =================================================");
             // Extract Numbers
-            numberExtractor(extractor);
+            numberExtractor(anthropicDataExtractor);
         } catch (Exception e) {
             Std.println(ERROR_MESSAGE+e.getMessage());
         }
         try {
             Std.println("Date & Time Extractor =============================================");
             // Extract Date and Time
-            dateTimeExtractor(extractor);
+            dateTimeExtractor(anthropicDataExtractor);
         } catch (Exception e) {
             Std.println(ERROR_MESSAGE+e.getMessage());
         }
         try {
             Std.println("Pojo Extractor ====================================================");
             // POJO Person Extractor
-             pojoExtractor(extractor);
+             pojoExtractor(anthropicDataExtractor);
         } catch (Exception e) {
             Std.println(ERROR_MESSAGE+e.getMessage());
         }
         try {
             Std.println("Complex Pogo Extractor ============================================");
             // Complex Pojo Extractor with Descriptions (rules)
-            complexPojoExtractor(model);
+            complexPojoExtractor(modelAnthropic);
         } catch (Exception e) {
             Std.println(ERROR_MESSAGE+e.getMessage());
         }

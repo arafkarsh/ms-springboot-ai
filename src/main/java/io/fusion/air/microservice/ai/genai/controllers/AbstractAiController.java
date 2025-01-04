@@ -18,6 +18,7 @@ package io.fusion.air.microservice.ai.genai.controllers;
 // LangChain
 import dev.langchain4j.model.chat.ChatLanguageModel;
 // Custom
+import io.fusion.air.microservice.ai.genai.utils.AiBeans;
 import io.fusion.air.microservice.domain.entities.example.ChatMessageEntity;
 import io.fusion.air.microservice.ai.genai.core.services.CustomDataAnalyzer;
 import io.fusion.air.microservice.ai.genai.core.services.TemplateManager;
@@ -90,7 +91,7 @@ public abstract class AbstractAiController extends AbstractController {
 	@PostMapping("/chat")
 	public ResponseEntity<StandardResponse> chat( @RequestBody String msg) {
 		msg = HtmlUtils.htmlEscape(msg);
-		log.info("|Chat Request to AI... {} ...  ", msg);
+		log.info("|Chat Request to AI... {} ...  {} ",getModelName(), msg);
 		String response = chatLanguageModel.generate(msg);
 		if(response != null) {
 			return ResponseEntity.ok(createResponse(response, msg));
@@ -114,7 +115,7 @@ public abstract class AbstractAiController extends AbstractController {
 	@PostMapping("/chat/custom")
 	public ResponseEntity<StandardResponse> chatCustomData(@RequestBody String msg) {
 		msg = HtmlUtils.htmlEscape(msg);
-		log.info("|Custom Chat Request to AI Engine {} ... ", msg);
+		log.info("|Custom Chat Request to AI Engine {} ...{} ",getModelName(), msg);
 		String response = CustomDataAnalyzer.processFile(msg);
 		if(response != null) {
 			return ResponseEntity.ok(createResponse(response, msg));
@@ -134,7 +135,7 @@ public abstract class AbstractAiController extends AbstractController {
 	@PostMapping("/chat/structured")
 	public ResponseEntity<StandardResponse> chatStructuredData(@RequestBody String msg) {
 		msg = HtmlUtils.htmlEscape(msg);
-		log.info("|Structured Chat Request to AI Engine {} ... ", msg);
+		log.info("|Structured Chat Request to AI Engine {} ... {} ",getModelName(), msg);
 		String response = TemplateManager.structuredTemplate("[P1: "+msg);
 		if(response != null) {
 			return ResponseEntity.ok(createResponse(response, msg));
@@ -159,7 +160,7 @@ public abstract class AbstractAiController extends AbstractController {
 	@GetMapping("/chat/userid/{userId}")
 	public ResponseEntity<StandardResponse> getProductStatus(@PathVariable("userId") String userId)  {
 		userId = HtmlUtils.htmlEscape(userId);
-		log.info("|Request to Get ChatMessages by User ID.. {} ", userId);
+		log.info("|Request to Get ChatMessages by User ID.. {} ... {} ",getModelName(), userId);
 		List<ChatMessageEntity> chats = chatMessageService.fetchByUserId(userId);
 		if(chats.isEmpty()) {
 			StandardResponse stdResponse = createSuccessResponse("Chats Fetch Success!");
@@ -182,7 +183,7 @@ public abstract class AbstractAiController extends AbstractController {
 		String[] rows = response.split("\n");
 		StandardResponse stdResponse = createSuccessResponse("AI Response");
 		LinkedHashMap<String, Object> data = new LinkedHashMap<>();
-		data.put("Algo", AiConstants.getOpenAIDefaultModel());
+		data.put("Model", getModelName());
 		data.put("Request", msg);
 		data.put("Response", rows);
 		stdResponse.setPayload(data);
@@ -208,7 +209,7 @@ public abstract class AbstractAiController extends AbstractController {
 	@PostMapping("/string/chat")
 	public String chatString( @RequestBody String msg) {
 		msg = HtmlUtils.htmlEscape(msg);
-		log.info("|Chat Request to AI...  {} ...  ", msg);
+		log.info("|Chat Request to AI...  {} ...  {} ",getModelName(), msg);
 		String response = chatLanguageModel.generate(msg);
 		if(response != null) {
 			return createResponseString(response, msg);
@@ -232,7 +233,7 @@ public abstract class AbstractAiController extends AbstractController {
 	@PostMapping("/string/chat/custom")
 	public String chatCustomDataString(@RequestBody String msg) {
 		msg = HtmlUtils.htmlEscape(msg);
-		log.info("|Custom Chat Request to AI Engine {} ... ", msg);
+		log.info("|Custom Chat Request to AI Engine {} ... {} ",getModelName(), msg);
 		String response = CustomDataAnalyzer.processFile(msg);
 		if(response != null) {
 			return createResponseString(response, msg);
@@ -252,7 +253,7 @@ public abstract class AbstractAiController extends AbstractController {
 	@PostMapping("/string/chat/structured")
 	public String chatStructuredDataString(@RequestBody String msg) {
 		msg = HtmlUtils.htmlEscape(msg);
-		log.info("|Structured Chat Request to AI Engine {} ... ", msg);
+		log.info("|Structured Chat Request to AI Engine {} ... {} ",getModelName(), msg);
 		String response = TemplateManager.structuredTemplate("[P1: "+msg);
 		if(response != null) {
 			return createResponseString(response, msg);
@@ -272,9 +273,19 @@ public abstract class AbstractAiController extends AbstractController {
 		msg = HtmlUtils.htmlEscape(msg);
 		StringBuilder sb = new StringBuilder();
 		String request = msg.replace("\n", " ").trim();
-		sb.append("Algorithm = ").append(AiConstants.getOpenAIDefaultModel()).append("\n");
+		sb.append("Model = ").append(getModelName()).append("\n");
 		sb.append("Request   = ").append(request).append("\n");
 		sb.append("Response  = ").append("\n").append(response);
 		return sb.toString();
+	}
+
+	// ======================================================================================
+
+	/**
+	 * Get the Model Name
+	 * @return
+	 */
+	public String getModelName() {
+		return AiBeans.getChatLanguageModelName(chatLanguageModel);
 	}
  }
