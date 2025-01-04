@@ -46,7 +46,7 @@ public class AiOllamaControllerImpl extends AbstractAiController {
 	 *
 	 * @param chatLanguageModel
 	 */
-	public AiOllamaControllerImpl(@Qualifier("ChatLanguageModelOllama")
+	public AiOllamaControllerImpl(@Qualifier("chatLanguageModelOllama")
 							ChatLanguageModel chatLanguageModel, ChatMessageService chatMessageService) {
 		super(chatLanguageModel, chatMessageService);
 	}

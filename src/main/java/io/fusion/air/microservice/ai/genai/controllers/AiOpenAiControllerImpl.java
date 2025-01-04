@@ -51,7 +51,7 @@ public class AiOpenAiControllerImpl extends AbstractAiController {
 	 *
 	 * @param chatLanguageModel
 	 */
-	public AiOpenAiControllerImpl(@Qualifier("ChatLanguageModelGPT")
+	public AiOpenAiControllerImpl(@Qualifier("chatLanguageModelGPT")
 							ChatLanguageModel chatLanguageModel, ChatMessageService chatMessageService) {
 		super(chatLanguageModel, chatMessageService);
 	}

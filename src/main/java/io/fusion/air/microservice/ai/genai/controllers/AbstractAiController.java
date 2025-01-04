@@ -61,6 +61,8 @@ public abstract class AbstractAiController extends AbstractController {
 	// based on the Qualifier "ChatLanguageModelGPT"
 	private final ChatLanguageModel chatLanguageModel;
 
+	private static final String UNABLE_TO_FETCH_DATA = "Unable to Fetch data... !";
+
 	/**
 	 * Auto Wire the Language Model
 	 * Loading the Bean with the name ChatLanguageModelGPT (defined in AiBeans).
@@ -93,7 +95,7 @@ public abstract class AbstractAiController extends AbstractController {
 		if(response != null) {
 			return ResponseEntity.ok(createResponse(response, msg));
 		}
-		throw new DataNotFoundException("Unable to Fetch data... !");
+		throw new DataNotFoundException(UNABLE_TO_FETCH_DATA);
 	}
 
 	@Operation(summary = "AI Chat - Custom Data")
@@ -117,7 +119,7 @@ public abstract class AbstractAiController extends AbstractController {
 		if(response != null) {
 			return ResponseEntity.ok(createResponse(response, msg));
 		}
-		throw new DataNotFoundException("Unable to retrieve data... !");
+		throw new DataNotFoundException(UNABLE_TO_FETCH_DATA);
 	}
 
 	@Operation(summary = "AI Chat - Structured Data - Recipe")
@@ -137,7 +139,7 @@ public abstract class AbstractAiController extends AbstractController {
 		if(response != null) {
 			return ResponseEntity.ok(createResponse(response, msg));
 		}
-		throw new DataNotFoundException("Unable to retrieve data... !");
+		throw new DataNotFoundException(UNABLE_TO_FETCH_DATA);
 	}
 
 	/**
@@ -211,7 +213,7 @@ public abstract class AbstractAiController extends AbstractController {
 		if(response != null) {
 			return createResponseString(response, msg);
 		}
-		throw new DataNotFoundException("Unable to retrieve data... !");
+		throw new DataNotFoundException(UNABLE_TO_FETCH_DATA);
 	}
 
 	@Operation(summary = "AI Chat - Custom Data (String) ")
@@ -235,7 +237,7 @@ public abstract class AbstractAiController extends AbstractController {
 		if(response != null) {
 			return createResponseString(response, msg);
 		}
-		throw new DataNotFoundException("Unable to retrieve data... !");
+		throw new DataNotFoundException(UNABLE_TO_FETCH_DATA);
 	}
 
 	@Operation(summary = "AI Chat - Structured Data - Recipe (String) ")
@@ -255,7 +257,7 @@ public abstract class AbstractAiController extends AbstractController {
 		if(response != null) {
 			return createResponseString(response, msg);
 		}
-		throw new DataNotFoundException("Unable to Fetch data... !");
+		throw new DataNotFoundException(UNABLE_TO_FETCH_DATA);
 	}
 
 	/**
