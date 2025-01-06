@@ -36,7 +36,7 @@ public class _10_Sentiment_Analyzer_Example {
         ChatLanguageModel modelPaln2 = AiBeans.getChatLanguageModelGoogle(AiConstants.GOOGLE_PALM_CHAT_BISON);
         AiBeans.printModelDetails(AiConstants.LLM_VERTEX, AiConstants.GOOGLE_PALM_CHAT_BISON);
 
-        // Create Ai Assistant
+        // Analyze the sentiment
         String request = """
                 The movie was quite engaging, although the songs were somewhat lackluster. Nevertheless, the background score and choreography significantly 
                 enhanced the musical sequences, making up for the shortcomings. Overall, the experience was not that bad.""";

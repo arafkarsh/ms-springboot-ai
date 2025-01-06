@@ -36,7 +36,7 @@ public class _10_Sentiment_Analyzer_Example {
         // Create Chat Language Model - Anthropic Claude 3 Haiku
         ChatLanguageModel modelAnthropic = AiBeans.getChatLanguageModelAnthropic(AiConstants.ANTHROPIC_CLAUDE_3_HAIKU);
         AiBeans.printModelDetails(AiConstants.LLM_ANTHROPIC, AiConstants.ANTHROPIC_CLAUDE_3_HAIKU);
-        // Create Ai Assistant
+        // Analyze the sentiment
         String request = """
                 The movie was quite engaging, although the songs were somewhat lackluster. Nevertheless, the background score and choreography significantly 
                 enhanced the musical sequences, making up for the shortcomings. Overall, the experience was not that bad.""";

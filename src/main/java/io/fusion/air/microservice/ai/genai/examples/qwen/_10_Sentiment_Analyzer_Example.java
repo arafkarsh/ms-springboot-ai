@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.fusion.air.microservice.ai.genai.examples.mistral;
+package io.fusion.air.microservice.ai.genai.examples.qwen;
 
 import dev.langchain4j.model.chat.ChatLanguageModel;
 import io.fusion.air.microservice.ai.genai.core.services.SentimentAnalyzer;
@@ -33,26 +33,26 @@ public class _10_Sentiment_Analyzer_Example {
 
     public static void main(String[] args) {
 
-        // Create Chat Language Model Mistral
-        ChatLanguageModel modelMistral = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_MISTRAL);
-        AiBeans.printModelDetails(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_MISTRAL);
+        // Create Chat Language Model Ollama Qwen 2.5
+        ChatLanguageModel modelQwen = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_QWEN_2_5);
+        AiBeans.printModelDetails(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_QWEN_2_5);
         // Analyze the sentiment
         String request = """
                 The movie was quite engaging, although the songs were somewhat lackluster. Nevertheless, the background score and choreography significantly 
                 enhanced the musical sequences, making up for the shortcomings. Overall, the experience was not that bad.""";
 
-        SentimentAnalyzer.analyzeSentiment(request, modelMistral,true);
+        SentimentAnalyzer.analyzeSentiment(request, modelQwen,true);
 
         request = """
                     The movie had a promising storyline, but the direction, acting, and cinematography were so over the top that they lulled the audience into 
                     a state of forced sleep. """;
-        SentimentAnalyzer.analyzeSentiment(request, modelMistral,true);
+        SentimentAnalyzer.analyzeSentiment(request, modelQwen,true);
 
         request = """
                     In essence, “Bramayugam” delves into the intricate dynamics between an autocratic ruler, oppressed citizens, and those yearning to rebel, 
                     portraying the timeless struggle between the privileged and the disenfranchised  across various epochs and landscapes. Through a finely 
                     crafted screenplay, stunning artistry, captivating cinematography, evocative background score, and stellar performances by the central  
                     characters, the film transcends mere entertainment, offering an immersive cinematic journey that resonates deeply with its audience. """;
-        SentimentAnalyzer.analyzeSentiment(request, modelMistral,true);
+        SentimentAnalyzer.analyzeSentiment(request, modelQwen,true);
     }
 }
