@@ -39,9 +39,9 @@ import static dev.langchain4j.data.message.UserMessage.userMessage;
  */
 public class _07_ChatMemory_Example {
 
-    public static void chatMemoryConversations(ChatLanguageModel llamaChatModel) {
+    public static void chatMemoryConversations(ChatLanguageModel modelQwen) {
         Tokenizer tokenizer = new OpenAiTokenizer(AiConstants.GPT_4_TURBO);
-        ChatMemory chatMemoryLlama = TokenWindowChatMemory.withMaxTokens(2000, tokenizer);
+        ChatMemory chatMemoryQwen = TokenWindowChatMemory.withMaxTokens(2000, tokenizer);
 
         // Setting the Context
         SystemMessage systemMessage = SystemMessage.from(
@@ -51,7 +51,7 @@ public class _07_ChatMemory_Example {
                         Java back-end, PostgreSQL Database,and Spring Data JPA.
                         You are checking the knowledge and skill-set of the team. 
                         """);
-        chatMemoryLlama.add(systemMessage);
+        chatMemoryQwen.add(systemMessage);
 
         // Conversation - 1
         UserMessage userMessage1 = userMessage(
@@ -60,9 +60,9 @@ public class _07_ChatMemory_Example {
                         2. How to add Security Features from Spring Security perspective?
                         Answer short in three to five lines maximum.
                  """);
-        chatMemoryLlama.add(userMessage1);
-        Response<AiMessage> response1 = llamaChatModel.generate(chatMemoryLlama.messages());
-        chatMemoryLlama.add(response1.content());
+        chatMemoryQwen.add(userMessage1);
+        Response<AiMessage> response1 = modelQwen.generate(chatMemoryQwen.messages());
+        chatMemoryQwen.add(response1.content());
         // Print Result
         AiBeans.printResult(userMessage1.text(), response1.content().text());
 
@@ -72,32 +72,32 @@ public class _07_ChatMemory_Example {
                 Give a concrete example implementation for the 2 points. 
                 Be short, 10 lines of code maximum.
                 """);
-        chatMemoryLlama.add(userMessage2);
-        Response<AiMessage> response2 = llamaChatModel.generate(chatMemoryLlama.messages());
-        chatMemoryLlama.add(response2.content());
+        chatMemoryQwen.add(userMessage2);
+        Response<AiMessage> response2 = modelQwen.generate(chatMemoryQwen.messages());
+        chatMemoryQwen.add(response2.content());
         // Print Result
         AiBeans.printResult(userMessage2.text(), response2.content().text());
     }
 
-    public static void chatMemoryWithMultipleUsers(ChatLanguageModel llamaChatModel) {
-        Assistant assistantLlama = AiServices.builder(Assistant.class)
-                .chatLanguageModel(llamaChatModel)
+    public static void chatMemoryWithMultipleUsers(ChatLanguageModel modelQwen) {
+        Assistant assistantQwen = AiServices.builder(Assistant.class)
+                .chatLanguageModel(modelQwen)
                 .chatMemoryProvider(memoryId -> MessageWindowChatMemory.withMaxMessages(10))
                 .build();
 
         String request1 = "UUID-1 >> Hello, my name is John Sam Doe";
-        String response1 = assistantLlama.chat("UUID-1", request1);
+        String response1 = assistantQwen.chat("UUID-1", request1);
         AiBeans.printResult(request1, response1);
 
         String request2 = "UUID-2, >> Hello, my name is Jane Daisy Doe";
-        String response2 = assistantLlama.chat("UUID-2", request2);
+        String response2 = assistantQwen.chat("UUID-2", request2);
         AiBeans.printResult(request2, response2);
 
         String request3 = "What is my name?";
-        String response3 = assistantLlama.chat("UUID-1", "UUID-1 >> "+request3);
+        String response3 = assistantQwen.chat("UUID-1", "UUID-1 >> "+request3);
         AiBeans.printResult("UUID-1 >> "+request3, response3);
 
-        String response4 = assistantLlama.chat("UUID-2", "UUID-2 >> "+request3);
+        String response4 = assistantQwen.chat("UUID-2", "UUID-2 >> "+request3);
         AiBeans.printResult("UUID-2 >> "+request3, response4);
 
     }
