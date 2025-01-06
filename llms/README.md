@@ -54,7 +54,7 @@ ollama run falcon2
 ollama run wizard-math:7b
 ```
 
-(C) Copyright 2024 : Apache 2 License : Author: Araf Karsh Hamid
+(C) Copyright 2024-25 : Apache 2 License : Author: Araf Karsh Hamid
 
 <pre> 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
