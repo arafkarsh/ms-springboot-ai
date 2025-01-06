@@ -16,8 +16,6 @@
 package io.fusion.air.microservice.ai.genai.examples.openai;
 
 import dev.langchain4j.model.chat.ChatLanguageModel;
-import dev.langchain4j.service.AiServices;
-import io.fusion.air.microservice.ai.genai.core.assistants.SentimentAssistant;
 import io.fusion.air.microservice.ai.genai.core.services.SentimentAnalyzer;
 import io.fusion.air.microservice.ai.genai.utils.AiBeans;
 import io.fusion.air.microservice.ai.genai.utils.AiConstants;
@@ -35,26 +33,29 @@ public class _10_Sentiment_Analyzer_Example {
 
     public static void main(String[] args) {
         // Create Chat Language Model - Open AI GPT 4o
-        ChatLanguageModel model = AiBeans.getChatLanguageModelOpenAi(AiConstants.GPT_4o);
+        ChatLanguageModel modelOpenAI = AiBeans.getChatLanguageModelOpenAi(AiConstants.GPT_4o);
         AiBeans.printModelDetails(AiConstants.LLM_OPENAI, AiConstants.GPT_4o);
         // Create the Assistant
-        SentimentAssistant sentimentAssistant = AiServices.create(SentimentAssistant.class, model);
         String request = """
-                The movie was quite engaging, although the songs were somewhat lackluster. Nevertheless, the background score and choreography significantly 
-                enhanced the musical sequences, making up for the shortcomings. Overall, the experience was not that bad.""";
-
-        SentimentAnalyzer.analyzeSentiment(request, true);
-
-        request = """
-                    The movie had a promising storyline, but the direction, acting, and cinematography were so over the top that they lulled the audience into 
-                    a state of forced sleep. """;
-        SentimentAnalyzer.analyzeSentiment(request, true);
+                    The movie had a promising storyline, but the direction, acting, and cinematography
+                    were so over the top that they lulled the audience into a state of forced sleep.""";
+        SentimentAnalyzer.analyzeSentiment(request, modelOpenAI,true);
 
         request = """
-                    In essence, “Bramayugam” delves into the intricate dynamics between an autocratic ruler, oppressed citizens, and those yearning to rebel, 
-                    portraying the timeless struggle between the privileged and the disenfranchised  across various epochs and landscapes. Through a finely 
-                    crafted screenplay, stunning artistry, captivating cinematography, evocative background score, and stellar performances by the central  
-                    characters, the film transcends mere entertainment, offering an immersive cinematic journey that resonates deeply with its audience. """;
-        SentimentAnalyzer.analyzeSentiment(request, true);
+                The movie was quite engaging, although the songs were somewhat lackluster. Nevertheless,
+                the background score and choreography significantly enhanced the musical sequences,
+                making up for the shortcomings. Overall, the experience was not that bad.""";
+
+        SentimentAnalyzer.analyzeSentiment(request, modelOpenAI, true);
+
+        request = """
+                    In essence, “Bramayugam” delves into the intricate dynamics between an autocratic
+                    ruler, oppressed citizens, and those yearning to rebel, portraying the timeless struggle
+                    between the privileged and the disenfranchised  across various epochs and landscapes.
+                    Through a finely  crafted screenplay, stunning artistry, captivating cinematography,
+                    evocative background score, and stellar performances by the central characters, the
+                    film transcends mere entertainment, offering an immersive cinematic journey that
+                    resonates deeply with its audience.""";
+        SentimentAnalyzer.analyzeSentiment(request, modelOpenAI,true);
     }
 }
