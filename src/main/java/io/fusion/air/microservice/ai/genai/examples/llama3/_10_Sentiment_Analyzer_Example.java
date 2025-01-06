@@ -36,7 +36,7 @@ public class _10_Sentiment_Analyzer_Example {
         // Create Chat Language Model llama3
         ChatLanguageModel modelLlama3 = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_LLAMA3);
         AiBeans.printModelDetails(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_LLAMA3);
-        // Create Ai Assistant
+        // Analyze the sentiment
         String request = """
                 The movie was quite engaging, although the songs were somewhat lackluster. Nevertheless, the background score and choreography significantly 
                 enhanced the musical sequences, making up for the shortcomings. Overall, the experience was not that bad.""";

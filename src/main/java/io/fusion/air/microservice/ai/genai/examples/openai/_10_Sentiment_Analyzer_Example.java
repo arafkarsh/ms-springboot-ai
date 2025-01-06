@@ -35,7 +35,7 @@ public class _10_Sentiment_Analyzer_Example {
         // Create Chat Language Model - Open AI GPT 4o
         ChatLanguageModel modelOpenAI = AiBeans.getChatLanguageModelOpenAi(AiConstants.GPT_4o);
         AiBeans.printModelDetails(AiConstants.LLM_OPENAI, AiConstants.GPT_4o);
-        // Create the Assistant
+        // Analyze the sentiment
         String request = """
                     The movie had a promising storyline, but the direction, acting, and cinematography
                     were so over the top that they lulled the audience into a state of forced sleep.""";

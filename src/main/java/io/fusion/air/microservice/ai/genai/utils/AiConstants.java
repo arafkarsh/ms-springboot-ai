@@ -86,6 +86,7 @@ public class AiConstants {
     public static final String OLLAMA_PHI_3                             = "phi3";
     public static final String OLLAMA_GEMMA                           = "gemma";
     public static final String OLLAMA_FALCON_2                        = "falcon2";
+    public static final String OLLAMA_QWEN_2_5                      = "qwen2.5";
     public static final String OLLAMA_WIZARD_MATH_7B             = "wizard-math:7b";
     public static final String OLLAMA_WIZARD_MATH_70B            = "wizard-math:70b";
 

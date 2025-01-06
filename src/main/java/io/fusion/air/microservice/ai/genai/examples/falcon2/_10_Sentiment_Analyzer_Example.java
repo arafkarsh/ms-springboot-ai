@@ -36,7 +36,7 @@ public class _10_Sentiment_Analyzer_Example {
         // Create Chat Language Model Google Falcon 2
         ChatLanguageModel modelFalcon2 = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_FALCON_2);
         AiBeans.printModelDetails(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_FALCON_2);
-        // Create Ai Assistant
+        // Analyze the sentiment
         String request = """
                 The movie was quite engaging, although the songs were somewhat lackluster. Nevertheless, the background score and choreography significantly 
                 enhanced the musical sequences, making up for the shortcomings. Overall, the experience was not that bad.""";
