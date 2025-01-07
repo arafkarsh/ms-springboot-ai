@@ -654,6 +654,42 @@ public final class Utils {
 		}
 	}
 
+	/**
+	 * Returns Time in Days:Hours:Mins
+	 * @param milliseconds
+	 * @return
+	 */
+	public static String printTimeDaysHoursMins(long milliseconds) {
+		// Convert milliseconds to total seconds
+		long totalSeconds = milliseconds / 1000;
+		// Calculate seconds, minutes, hours, and days
+		long seconds = totalSeconds % 60;
+		long totalMinutes = totalSeconds / 60;
+		long minutes = totalMinutes % 60;
+		long totalHours = totalMinutes / 60;
+		long hours = totalHours % 24;
+		long days = totalHours / 24;
+
+		// Format and print the time as DD:HH:MM:SS
+		return  String.format("%02d:%02d:%02d:%02d", days, hours, minutes, seconds);
+	}
+
+	/**
+	 * Returns Time in Hours:Mins:Seconds
+	 * @param milliseconds
+	 * @return
+	 */
+	public static String printTimeHoursMinsSeconds(long milliseconds) {
+		long totalSeconds = milliseconds / 1000;
+		long seconds = totalSeconds % 60;
+		long totalMinutes = totalSeconds / 60;
+		long minutes = totalMinutes % 60;
+		long hours = totalMinutes / 60;
+
+		// Format and print the time as HH:MM:SS
+		return String.format("%02d:%02d:%02d", hours, minutes, seconds);
+	}
+
 	public static void generateUUIDs() {
 		for(int x=0; x<10; x++) {
 			Std.println(x+" UUID = "+UUID.randomUUID());
@@ -677,6 +713,12 @@ public final class Utils {
 	 * @throws Exception
 	 */
 	public static void main(String[] args)  {
-		generateUUIDs();
+		// generateUUIDs();
+
+		Std.println(printTimeHoursMinsSeconds(500));
+		Std.println(printTimeHoursMinsSeconds(5000));
+		Std.println(printTimeHoursMinsSeconds(35000));
+		Std.println(printTimeHoursMinsSeconds(72000));
+		Std.println(printTimeHoursMinsSeconds(172000));
 	}
 }

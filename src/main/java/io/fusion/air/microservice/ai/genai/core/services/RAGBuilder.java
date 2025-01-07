@@ -190,7 +190,7 @@ public class RAGBuilder {
      */
     public static Assistant createCarRentalAssistantSimple(ChatLanguageModel model) {
         // Documents for processing
-        List<Document> documents = loadDocuments(Utils.toPath("static/data/e/"), Utils.getPathMatcher("*.txt"));
+        List<Document> documents = loadDocuments(Utils.toPath("static/data/e/"), Utils.getPathMatcher("ozazo-car-*.txt"));
         // Embedding Model
         EmbeddingModel embeddingModel = new AllMiniLmL6V2EmbeddingModel();
         // Here, we create and empty in-memory store for our documents and their embeddings.
