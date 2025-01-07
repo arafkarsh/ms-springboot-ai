@@ -40,7 +40,7 @@ public class _59_RAG_HealthCare_Example {
         AiBeans.printModelDetails(AiConstants.LLM_ANTHROPIC, AiConstants.ANTHROPIC_CLAUDE_3_HAIKU);
         // Create the Assistant
         // Setting up the Gen AI Context with Open AI LLM, and RAG
-        HealthCareAssistant assistant = new RAGHealthCareService(AiConstants.LLM_ANTHROPIC, AiConstants.ANTHROPIC_CLAUDE_3_HAIKU);
+        HealthCareAssistant assistant = new RAGHealthCareService(modelAnthropic);
         // Start the Conversation with iCare Health Care Diagnosis Service ChatBot
         // - Hi
         // - I need the diagnosis history of Akiera Kiera for the past 3 years

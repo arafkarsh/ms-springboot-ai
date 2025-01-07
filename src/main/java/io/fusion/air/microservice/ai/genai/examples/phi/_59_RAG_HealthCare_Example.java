@@ -40,7 +40,7 @@ public class _59_RAG_HealthCare_Example {
         AiBeans.printModelDetails(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_PHI);
         // Create the Assistant
         // Setting up the Gen AI Context with Open AI LLM, and RAG
-        HealthCareAssistant assistant = new RAGHealthCareService(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_PHI);
+        HealthCareAssistant assistant = new RAGHealthCareService(modelPhi);
 
         // Start the Conversation with iCare Health Care Diagnosis Service ChatBot
         // - Hi
