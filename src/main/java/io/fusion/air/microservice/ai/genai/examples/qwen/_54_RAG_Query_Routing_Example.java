@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.fusion.air.microservice.ai.genai.examples.llama3;
+package io.fusion.air.microservice.ai.genai.examples.qwen;
 
 import dev.langchain4j.model.chat.ChatLanguageModel;
 import dev.langchain4j.rag.content.retriever.ContentRetriever;
@@ -56,13 +56,12 @@ public class _54_RAG_Query_Routing_Example {
      * For scenario 4, this example will demonstrate how to use a {@link LanguageModelQueryRouter}.
      */
     public static void main(String[] args) {
-        // WARNING: Query Routing is not working with Llama 3
         // It's not able to pickup the content of the person provided in the biography doc.
-        // Create Chat Language Model Google Llama3
-        ChatLanguageModel modelLlama = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_LLAMA3);
-        AiBeans.printModelDetails(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_LLAMA3);
+        // Create Chat Language Model Ollama Qwen 2.5
+        ChatLanguageModel modelQwen = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_QWEN_2_5);
+        AiBeans.printModelDetails(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_QWEN_2_5);
         // Setting up the Gen AI Context with Open AI LLM, and RAG
-        Assistant assistant = RAGBuilder.createAssistantWithQueryRouter(modelLlama);
+        Assistant assistant = RAGBuilder.createAssistantWithQueryRouter(modelQwen);
         // Start the Conversation with Multi Data Source ChatBot
         // - What is the legacy of Akiera Kiera?
         // - When was he born?

@@ -38,11 +38,11 @@ public class _51_RAG_Simple_Example {
      */
     public static void main(String[] args) {
         // Create Chat Language Model Microsoft PHI - 3
-        ChatLanguageModel model = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_PHI_3);
+        ChatLanguageModel modelPhi3 = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_PHI_3);
         AiBeans.printModelDetails(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_PHI_3);
         // Create Assistant
         // Setting up the Gen AI Context with Open AI LLM, and RAG
-        Assistant assistant = RAGBuilder.createCarRentalAssistantSimple(model);
+        Assistant assistant = RAGBuilder.createCarRentalAssistantSimple(modelPhi3);
         // Start the Conversation with Ozazo Rental Service ChatBot
         // - Hello
         // - I am Sam. Can I cancel my reservation?

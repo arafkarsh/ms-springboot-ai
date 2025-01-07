@@ -38,10 +38,10 @@ public class _51_RAG_Simple_Example {
      */
     public static void main(String[] args) {
         // Create Chat Language Model Mistral
-        ChatLanguageModel model = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_MISTRAL);        // Create the Ai Assistant
+        ChatLanguageModel modelMistral = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_MISTRAL);        // Create the Ai Assistant
         AiBeans.printModelDetails(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_MISTRAL);
         // Setting up the Gen AI Context with Open AI LLM, and RAG
-        Assistant assistant = RAGBuilder.createCarRentalAssistantSimple(model);
+        Assistant assistant = RAGBuilder.createCarRentalAssistantSimple(modelMistral);
         // Start the Conversation with Ozazo Rental Service ChatBot
         // - Hello
         // - I am Sam. Can I cancel my reservation?

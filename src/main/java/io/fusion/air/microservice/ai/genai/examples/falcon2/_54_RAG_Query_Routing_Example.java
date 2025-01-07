@@ -59,11 +59,11 @@ public class _54_RAG_Query_Routing_Example {
         // WARNING: Query Routing is not working with Llama 3
         // It's not able to pickup the content of the person provided in the biography doc.
         // Create Chat Language Model Google Falcon 2
-        ChatLanguageModel model = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_FALCON_2);
+        ChatLanguageModel modelFalcon = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_FALCON_2);
         AiBeans.printModelDetails(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_FALCON_2);
         // Create Ai Assistant
         // Setting up the Gen AI Context with Open AI LLM, and RAG
-        Assistant assistant = RAGBuilder.createAssistantWithQueryRouter(model);
+        Assistant assistant = RAGBuilder.createAssistantWithQueryRouter(modelFalcon);
         // Start the Conversation with Multi Data Source ChatBot
         // - What is the legacy of Akiera Kiera?
         // - When was he born?

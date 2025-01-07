@@ -52,11 +52,11 @@ public class _53_RAG_Query_Compression_Example {
      */
     public static void main(String[] args) {
         // Create Chat Language Model Microsoft PHI - 3
-        ChatLanguageModel model = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_PHI_3);
+        ChatLanguageModel modelPhi3 = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_PHI_3);
         AiBeans.printModelDetails(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_PHI_3);
         // Create Assistant
         // Setting up the Gen AI Context with Open AI LLM, and RAG
-        Assistant assistant = RAGBuilder.createAssistantWithQueryTransformer();
+        Assistant assistant = RAGBuilder.createAssistantWithQueryTransformer(modelPhi3);
         // Start the Conversation with Akiera Kiera Biography ChatBot
         // - What is the legacy of Akiera Kiera?
         // - When was he born?

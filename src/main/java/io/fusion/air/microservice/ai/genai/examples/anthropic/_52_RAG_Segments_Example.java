@@ -49,11 +49,11 @@ public class _52_RAG_Segments_Example {
      */
     public static void main(String[] args) {
         // Create Chat Language Model - Anthropic Claude 3 Haiku
-        ChatLanguageModel model = AiBeans.getChatLanguageModelAnthropic(AiConstants.ANTHROPIC_CLAUDE_3_HAIKU);
+        ChatLanguageModel modelAnthropic = AiBeans.getChatLanguageModelAnthropic(AiConstants.ANTHROPIC_CLAUDE_3_HAIKU);
         AiBeans.printModelDetails(AiConstants.LLM_ANTHROPIC, AiConstants.ANTHROPIC_CLAUDE_3_HAIKU);
         // Create Ai Assistant
         // Setting up the Gen AI Context with Open AI LLM, and RAG
-        CarRentalAssistant assistant = RAGBuilder.createCarRentalAssistantWithSegments(model);
+        CarRentalAssistant assistant = RAGBuilder.createCarRentalAssistantWithSegments(modelAnthropic);
         // Start the Conversation with Ozazo Rental Service ChatBot
         // - Hello
         // - I am Sam. Can I cancel my reservation?
