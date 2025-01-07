@@ -145,12 +145,16 @@ public class ConsoleRunner implements CommandLineRunner {
             Std.println("--[HAL9000]---------------------------------------------------------------------------");
             Std.println(response);
             Std.println(CONSOLE_SLINE);
-            long diffTime = System.currentTimeMillis() - sTime;
-            Std.println("Time HH:MM:SS = "+ Utils.printTimeHoursMinsSeconds(diffTime) + " Milli Seconds = "+diffTime);
-            Std.println(CONSOLE_SLINE);
+            calculateRunTime(sTime);
         } catch (Exception e) {
             Std.println("Chat Error: "+e.getMessage());
         }
         return 0;
+    }
+
+    private static void calculateRunTime(long sTime) {
+        long diffTime = System.currentTimeMillis() - sTime;
+        Std.println("Time HH:MM:SS = "+ Utils.printTimeHoursMinsSeconds(diffTime) + " Milli Seconds = "+diffTime);
+        Std.println(CONSOLE_SLINE);
     }
 }
