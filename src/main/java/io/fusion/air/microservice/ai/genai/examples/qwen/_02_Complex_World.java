@@ -33,10 +33,10 @@ public class _02_Complex_World {
 
     public static void main(String[] args) {
         // Create Chat Language Model Ollama Qwen 2.5
-        ChatLanguageModel model = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_QWEN_2_5);
+        ChatLanguageModel model = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_QWEN);
         // Create the Ai Assistant
         HAL9000Assistant hal9kQwen = new AiBeans().createHAL9000(model);
-        AiBeans.printModelDetails(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_QWEN_2_5);
+        AiBeans.printModelDetails(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_QWEN);
 
         // Run the DownloadAllData Cases
         complexWorld1UsingQwen(hal9kQwen);

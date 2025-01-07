@@ -52,8 +52,8 @@ public class _53_RAG_Query_Compression_Example {
      */
     public static void main(String[] args) {
         // Create Chat Language Model Ollama Qwen 2.5
-        ChatLanguageModel modelQwen = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_QWEN_2_5);
-        AiBeans.printModelDetails(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_QWEN_2_5);
+        ChatLanguageModel modelQwen = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_QWEN);
+        AiBeans.printModelDetails(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_QWEN);
         // Setting up the Gen AI Context with Open AI LLM, and RAG
         Assistant assistant = RAGBuilder.createAssistantWithQueryTransformer(modelQwen);
         // Start the Conversation with Akiera Kiera Biography ChatBot

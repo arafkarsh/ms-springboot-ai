@@ -58,8 +58,8 @@ public class _54_RAG_Query_Routing_Example {
     public static void main(String[] args) {
         // It's not able to pickup the content of the person provided in the biography doc.
         // Create Chat Language Model Ollama Qwen 2.5
-        ChatLanguageModel modelQwen = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_QWEN_2_5);
-        AiBeans.printModelDetails(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_QWEN_2_5);
+        ChatLanguageModel modelQwen = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_QWEN);
+        AiBeans.printModelDetails(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_QWEN);
         // Setting up the Gen AI Context with Open AI LLM, and RAG
         Assistant assistant = RAGBuilder.createAssistantWithQueryRouter(modelQwen);
         // Start the Conversation with Multi Data Source ChatBot

@@ -41,12 +41,21 @@ public class RAGHealthCareService implements HealthCareAssistant {
     }
 
     /**
-     * Create RAG HealthCare Service
+     * Create RAG HealthCare Assistant with a Language Model
      * @param groupName
      * @param modelName
      */
     public RAGHealthCareService(String groupName, String modelName) {
-        model = createLanguageModel( groupName,  modelName);
+        this.model = createLanguageModel( groupName,  modelName);
+        assistant = RAGHealthCareBuilder.createHealthCareAssistant( model);
+    }
+
+    /**
+     * Create a RAG HealthCare Assistant with a Language Model
+     * @param model
+     */
+    public RAGHealthCareService(ChatLanguageModel model) {
+        this.model = model;
         assistant = RAGHealthCareBuilder.createHealthCareAssistant( model);
     }
 
@@ -93,14 +102,14 @@ public class RAGHealthCareService implements HealthCareAssistant {
         if(patient.isValid()) {
             patientName = patient.toString();
             userQuery = getPatientPrompt(patient).text();
-            Std.println(">> Patient:"+patientName+" << "+userQuery);
+            Std.println("Debug>> Patient:"+patientName+" << "+userQuery);
         } else {
             // Extract Patient ID
             long patientLongId = patientIdExtractor(uQuery);
             if (patientLongId > 0) {
                 patientId = "" + patientLongId;
                 userQuery = getPatientIdPrompt(patientLongId).text();
-                Std.println(">> Patient:"+patientId+" << "+userQuery);
+                Std.println("Debug>> Patient:"+patientId+" << "+userQuery);
             }
         }
         // If UserQuery is still NULL then check for special commands starting with [P:

@@ -49,8 +49,8 @@ public class _52_RAG_Segments_Example {
      */
     public static void main(String[] args) {
         // Create Chat Language Model Ollama Qwen 2.5
-        ChatLanguageModel modelQwen = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_QWEN_2_5);
-        AiBeans.printModelDetails(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_QWEN_2_5);
+        ChatLanguageModel modelQwen = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_QWEN);
+        AiBeans.printModelDetails(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_QWEN);
         // Setting up the Gen AI Context with Open AI LLM, and RAG
         CarRentalAssistant assistant = RAGBuilder.createCarRentalAssistantWithSegments(modelQwen);
         // Start the Conversation with Ozazo Rental Service ChatBot

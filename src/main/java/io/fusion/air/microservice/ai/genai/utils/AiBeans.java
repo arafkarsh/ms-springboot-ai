@@ -100,16 +100,16 @@ public class AiBeans {
     }
 
     /**
-     * Get the Ollama Chat Language Model (llama3)
+     * Get the Ollama Chat Language Model (llama)
      * @return
      */
     public static ChatLanguageModel getChatLanguageModelLlama() {
-        return getChatLanguageModelLlama(AiConstants.OLLAMA_LLAMA3);
+        return getChatLanguageModelLlama(AiConstants.OLLAMA_LLAMA);
     }
 
     /**
      * Get the Ollama Chat Language Model
-     * 1. Llama 3 (llama3)
+     * 1. Llama 3 (llama)
      * 2. Misrtal (mistral)
      * 3. Phi-3 (phi-3)
      * 4. Gemma (gemma)
@@ -228,16 +228,16 @@ public class AiBeans {
      */
     @Bean(name = "chatLanguageModelOllama")
     public ChatLanguageModel createChatLanguageModelLlama() {
-        return createChatLanguageModelLlama( AiConstants.OLLAMA_LLAMA3);
+        return createChatLanguageModelLlama( AiConstants.OLLAMA_LLAMA);
     }
 
     /**
      * Returns Chat Language Model based on
-     * 1. Llama 3 (llama3)
+     * 1. Llama 3 (llama)
      * 2. Misrtal (mistral)
      * 3. Phi-3 (phi-3)
      * 4. Gemma (gemma)
-     * 5. Falcon (falcon2)
+     * 5. Falcon (falcon)
      * 6. Wizard Math (wizard-math:7b)
      *
      * @param model

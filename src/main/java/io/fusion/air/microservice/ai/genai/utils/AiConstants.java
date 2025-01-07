@@ -77,18 +77,21 @@ public class AiConstants {
     @Value("${langchain4j.ollama.url:http://localhost:11434/api/generate}")
     private  String ollamaBaseUrl;
 
-    @Value("${langchain4j.ollama.model:llama3}")
+    @Value("${langchain4j.ollama.model:llama.1}")
     private  String ollamaModel;
 
     private static String OLLAMA_URL;
-    public static final String OLLAMA_LLAMA3                          = "llama3";
-    public static final String OLLAMA_MISTRAL                         = "mistral";
-    public static final String OLLAMA_PHI_3                             = "phi3";
-    public static final String OLLAMA_GEMMA                           = "gemma";
-    public static final String OLLAMA_FALCON_2                        = "falcon2";
-    public static final String OLLAMA_QWEN_2_5                      = "qwen2.5";
-    public static final String OLLAMA_WIZARD_MATH_7B             = "wizard-math:7b";
-    public static final String OLLAMA_WIZARD_MATH_70B            = "wizard-math:70b";
+    // Standard LLMs
+    public static final String OLLAMA_LLAMA                   = "llama3.1";            // 8b Meta
+    public static final String OLLAMA_LLAMA_SMALL         = "llama3.2";            // 3.2b Meta
+    public static final String OLLAMA_MISTRAL                = "mistral-nemo";        // 12b with NVIDIA
+    public static final String OLLAMA_PHI                       = "phi3";                  // 3.8b Microsoft
+    public static final String OLLAMA_GEMMA                  = "gemma2";              // 9b  Google
+    public static final String OLLAMA_FALCON                  = "falcon3";              // 7b TII
+    public static final String OLLAMA_QWEN                    = "qwen2.5";             // 7b Alibaba
+    // Math Focused LLMs
+    public static final String OLLAMA_WIZARD_MATH_7B    = "wizard-math:7b";
+    public static final String OLLAMA_WIZARD_MATH_70B   = "wizard-math:70b";
 
     // Anthropic Claude Config ----------------------------------------------------------
     public static final String ANTHROPIC_CLAUDE_3_HAIKU = "claude-3-haiku-20240307";
@@ -111,9 +114,9 @@ public class AiConstants {
     // Google Gemini Models -------------------------------------------------------------
     // https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versioning
     public static final String GOOGLE_GEMINI_PRO               = "gemini-1.5-pro-preview-0514";     // Expires June 24, 2024
-    // ""gemini-1.5-pro-001";          // Expires May 24, 2025
+    // "gemini-1.5-pro-001";          // Expires May 24, 2025
     public static final String GOOGLE_GEMINI_FLASH             = "gemini-1.5-flash-preview-0514";   // Expires June 24, 2024
-    // ""gemini-1.5-flash-001";       // Expires May 24, 2025
+    // "gemini-1.5-flash-001";       // Expires May 24, 2025
     public static final String GOOGLE_GEMINI_NANO             = "gemini-1.5-nano";
     public static final String GOOGLE_GEMINI_ULTRA            = "gemini-ultra";
     public static final String GOOGLE_GEMINI_PRO_VISION    = "gemini-1.0-pro-vision-001";

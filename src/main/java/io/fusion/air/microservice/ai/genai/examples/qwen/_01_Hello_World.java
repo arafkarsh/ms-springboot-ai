@@ -28,10 +28,10 @@ public class _01_Hello_World {
 
     public static void main(String[] args) {
         // Create Chat Language Model Ollama Qwen 2.5
-        ChatLanguageModel model = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_QWEN_2_5);
+        ChatLanguageModel model = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_QWEN);
         String request = "Explain French Revolution";
         String response = model.generate(request);
-        AiBeans.printModelDetails(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_QWEN_2_5);
+        AiBeans.printModelDetails(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_QWEN);
         AiBeans.printResult(request, response);
     }
 }

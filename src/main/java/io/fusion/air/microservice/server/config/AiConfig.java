@@ -58,8 +58,8 @@ public class AiConfig {
     @Value("${langchain4j.ollama.url:http://localhost:11434/api/generate/}")
     private String ollamaURL;
 
-    // langchain4j.ollama.model=llama3
-    @Value("${langchain4j.ollama.model:llama3}")
+    // langchain4j.ollama.model=llama
+    @Value("${langchain4j.ollama.model:llama}")
     private String modelOllama;
 
     // langchain4j.cohere-api-key

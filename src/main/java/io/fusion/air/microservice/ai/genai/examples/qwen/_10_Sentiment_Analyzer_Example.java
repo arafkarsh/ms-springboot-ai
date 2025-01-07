@@ -34,8 +34,8 @@ public class _10_Sentiment_Analyzer_Example {
     public static void main(String[] args) {
 
         // Create Chat Language Model Ollama Qwen 2.5
-        ChatLanguageModel modelQwen = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_QWEN_2_5);
-        AiBeans.printModelDetails(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_QWEN_2_5);
+        ChatLanguageModel modelQwen = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_QWEN);
+        AiBeans.printModelDetails(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_QWEN);
         // Analyze the sentiment
         String request = """
                 The movie was quite engaging, although the songs were somewhat lackluster. Nevertheless, the background score and choreography significantly 
