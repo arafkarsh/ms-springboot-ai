@@ -35,12 +35,13 @@ public class _59_RAG_HealthCare_Example {
      * This example demonstrates how to implement Health Care Diagnosis Service Example
      */
     public static void main(String[] args) {
-        // Create Chat Language Model Google Falcon 2
+        // WARNING After upgrading to Falcon 3 - This code stopped working - Need to check it out
+        // Create Chat Language Model Google Falcon 3
         ChatLanguageModel modelFalcon = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_FALCON);
         AiBeans.printModelDetails(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_FALCON);
         // Create the Assistant
         // Setting up the Gen AI Context with Open AI LLM, and RAG
-        HealthCareAssistant assistant = new RAGHealthCareService(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_FALCON);
+        HealthCareAssistant assistant = new RAGHealthCareService(modelFalcon);
         // Start the Conversation with iCare Health Care Diagnosis Service ChatBot
         // - Hi
         // - I need the diagnosis history of Akiera Kiera for the past 3 years

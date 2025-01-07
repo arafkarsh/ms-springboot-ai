@@ -27,12 +27,13 @@ import io.fusion.air.microservice.ai.genai.utils.AiConstants;
 public class _01_Hello_World {
 
     public static void main(String[] args) {
-        // Create Chat Language Model Google Falcon 2
+        // Create Chat Language Model Google Falcon 3
         ChatLanguageModel model = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_FALCON);
+        AiBeans.printModelDetails(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_FALCON);
+
         String request = "Explain French Revolution";
         String response = model.generate(request);
 
-        AiBeans.printModelDetails(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_FALCON);
         AiBeans.printResult(request, response);
     }
 }
