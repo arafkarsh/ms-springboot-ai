@@ -41,7 +41,7 @@ public class _59_RAG_HealthCare_Example {
         // testPatientDataExtractor();
 
         // Create Chat Language Model Google Vertex AI - PaLM 2
-        ChatLanguageModel model = AiBeans.getChatLanguageModelGoogle(AiConstants.GOOGLE_PALM_CHAT_BISON);
+        ChatLanguageModel modelPalm = AiBeans.getChatLanguageModelGoogle(AiConstants.GOOGLE_PALM_CHAT_BISON);
         AiBeans.printModelDetails(AiConstants.LLM_VERTEX, AiConstants.GOOGLE_PALM_CHAT_BISON);
         // Create the Assistant
         // Setting up the Gen AI Context with Open AI LLM, and RAG
@@ -57,25 +57,26 @@ public class _59_RAG_HealthCare_Example {
     }
 
     public static void testPatientDataExtractor() {
-        ChatLanguageModel model = AiBeans.getChatLanguageModelOpenAi(AiConstants.GPT_3_5_TURBO);
-        AiBeans.printModelDetails(AiConstants.LLM_OPENAI, AiConstants.GPT_3_5_TURBO);
+        // Create Chat Language Model Google Vertex AI - PaLM 2
+        ChatLanguageModel modelPalm = AiBeans.getChatLanguageModelGoogle(AiConstants.GOOGLE_PALM_CHAT_BISON);
+        AiBeans.printModelDetails(AiConstants.LLM_VERTEX, AiConstants.GOOGLE_PALM_CHAT_BISON);
         // Create the Assistant
         // Setting up the Gen AI Context with Open AI LLM, and RAG
-        Patient patient0 = RAGHealthCareBuilder.patientNameExtractor("Hi", model);
+        Patient patient0 = RAGHealthCareBuilder.patientNameExtractor("Hi", modelPalm);
         Patient patient1 = RAGHealthCareBuilder.patientNameExtractor(
-                "I need the diagnosis history of Akiera Kiera for the past 3 years", model);
+                "I need the diagnosis history of Akiera Kiera for the past 3 years", modelPalm);
         Patient patient2 = RAGHealthCareBuilder.patientNameExtractor(
-                "I need the diagnosis history of  Jane Susan Wood for the past 4 years", model);
+                "I need the diagnosis history of  Jane Susan Wood for the past 4 years", modelPalm);
 
         long patientId1 = RAGHealthCareBuilder.patientIdExtractor(
-                "I need the diagnosis history of Patient Id 300100202",  model);
+                "I need the diagnosis history of Patient Id 300100202",  modelPalm);
         long patientId2 = RAGHealthCareBuilder.patientIdExtractor(
-                "I need the diagnosis history of Patient 400100201",  model);
+                "I need the diagnosis history of Patient 400100201",  modelPalm);
 
         Patient patient3 = RAGHealthCareBuilder.patientNameExtractor(
-                "I need the diagnosis history for the past 4 years", model);
+                "I need the diagnosis history for the past 4 years", modelPalm);
 
         long patientId3 = RAGHealthCareBuilder.patientIdExtractor(
-                "I need the diagnosis history of Sam",  model);
+                "I need the diagnosis history of Sam",  modelPalm);
     }
 }

@@ -36,11 +36,11 @@ public class _56_RAG_Meta_Data_Example {
 
     public static void main(String[] args) {
         // Create Chat Language Model Google Gemma
-        ChatLanguageModel model = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_GEMMA);
+        ChatLanguageModel modelGemma = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_GEMMA);
         AiBeans.printModelDetails(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_GEMMA);
         // Create Ai Assistant
         // Setting up the Gen AI Context with Open AI LLM, and RAG
-        Assistant assistant = RAGBuilder.createAssistantWithMetaData(model);
+        Assistant assistant = RAGBuilder.createAssistantWithMetaData(modelGemma);
         // Start the Conversation with Multi Data Source ChatBot
         // - I am Sam. Can I cancel my reservation?
         // - Please explain the refund policy.

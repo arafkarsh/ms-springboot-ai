@@ -36,7 +36,7 @@ public class _59_RAG_HealthCare_Example {
      */
     public static void main(String[] args) {
         // Create Chat Language Model Mistral
-        ChatLanguageModel model = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_MISTRAL);
+        ChatLanguageModel modelMistral = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_MISTRAL);
         AiBeans.printModelDetails(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_MISTRAL);
         // Create the Assistant
         // Setting up the Gen AI Context with Open AI LLM, and RAG

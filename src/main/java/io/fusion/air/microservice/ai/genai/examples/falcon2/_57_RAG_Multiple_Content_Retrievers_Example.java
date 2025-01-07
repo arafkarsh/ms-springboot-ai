@@ -36,11 +36,11 @@ public class _57_RAG_Multiple_Content_Retrievers_Example {
 
     public static void main(String[] args) {
         // Create Chat Language Model Google Falcon 2
-        ChatLanguageModel model = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_FALCON_2);
+        ChatLanguageModel modelFalcon = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_FALCON_2);
         AiBeans.printModelDetails(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_FALCON_2);
         // Create Ai Assistant
         // Setting up the Gen AI Context with Open AI LLM, and RAG
-        Assistant assistant = RAGBuilder.createAssistantWithMultiContentRetrievers(model);
+        Assistant assistant = RAGBuilder.createAssistantWithMultiContentRetrievers(modelFalcon);
         // Start the Conversation with Multi Data Source ChatBot
         // - I am Sam. Can I cancel my reservation?
         // - Please explain the refund policy.

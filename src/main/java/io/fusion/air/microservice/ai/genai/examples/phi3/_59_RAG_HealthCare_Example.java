@@ -36,7 +36,7 @@ public class _59_RAG_HealthCare_Example {
      */
     public static void main(String[] args) {
         // Create Chat Language Model Microsoft PHI - 3
-        ChatLanguageModel model = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_PHI_3);
+        ChatLanguageModel modelPhi = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_PHI_3);
         AiBeans.printModelDetails(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_PHI_3);
         // Create the Assistant
         // Setting up the Gen AI Context with Open AI LLM, and RAG

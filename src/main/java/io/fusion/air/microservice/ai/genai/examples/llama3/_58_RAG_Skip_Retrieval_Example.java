@@ -52,10 +52,10 @@ public class _58_RAG_Skip_Retrieval_Example {
 
     public static void main(String[] args) {
         // Create Chat Language Model Google Llama3
-        ChatLanguageModel model = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_LLAMA3);
+        ChatLanguageModel modelLlama = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_LLAMA3);
         AiBeans.printModelDetails(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_LLAMA3);
         // Setting up the Gen AI Context with Open AI LLM, and RAG
-        Assistant assistant = RAGBuilder.createAssistantWithRetrievalSkipping(model);
+        Assistant assistant = RAGBuilder.createAssistantWithRetrievalSkipping(modelLlama);
         // Start the Conversation with Multi Data Source ChatBot
         // - Hi
         // Notice how this query is not routed to any retrievers.

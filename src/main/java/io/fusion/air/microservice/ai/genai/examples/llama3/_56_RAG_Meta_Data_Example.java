@@ -36,10 +36,10 @@ public class _56_RAG_Meta_Data_Example {
 
     public static void main(String[] args) {
         // Create Chat Language Model Google Llama3
-        ChatLanguageModel model = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_LLAMA3);
+        ChatLanguageModel modelLlama = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_LLAMA3);
         AiBeans.printModelDetails(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_LLAMA3);
         // Setting up the Gen AI Context with Open AI LLM, and RAG
-        Assistant assistant = RAGBuilder.createAssistantWithMetaData(model);
+        Assistant assistant = RAGBuilder.createAssistantWithMetaData(modelLlama);
         // Start the Conversation with Multi Data Source ChatBot
         // - I am Sam. Can I cancel my reservation?
         // - Please explain the refund policy.

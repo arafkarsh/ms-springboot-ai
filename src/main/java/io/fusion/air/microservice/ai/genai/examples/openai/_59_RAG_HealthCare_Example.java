@@ -37,26 +37,26 @@ public class _59_RAG_HealthCare_Example {
      *
      */
     private static void testPatientDataExtractor() {
-        ChatLanguageModel model = AiBeans.getChatLanguageModelOpenAi(AiConstants.GPT_3_5_TURBO);
+        ChatLanguageModel modelOpenAI = AiBeans.getChatLanguageModelOpenAi(AiConstants.GPT_3_5_TURBO);
         AiBeans.printModelDetails(AiConstants.LLM_OPENAI, AiConstants.GPT_3_5_TURBO);
         // Create the Assistant
         // Setting up the Gen AI Context with Open AI LLM, and RAG
-        Patient patient0 = RAGHealthCareBuilder.patientNameExtractor("Hi", model);
+        Patient patient0 = RAGHealthCareBuilder.patientNameExtractor("Hi", modelOpenAI);
         Patient patient1 = RAGHealthCareBuilder.patientNameExtractor(
-                "I need the diagnosis history of Akiera Kiera for the past 3 years", model);
+                "I need the diagnosis history of Akiera Kiera for the past 3 years", modelOpenAI);
         Patient patient2 = RAGHealthCareBuilder.patientNameExtractor(
-                "I need the diagnosis history of  Jane Susan Wood for the past 4 years", model);
+                "I need the diagnosis history of  Jane Susan Wood for the past 4 years", modelOpenAI);
 
         long patientId1 = RAGHealthCareBuilder.patientIdExtractor(
-                "I need the diagnosis history of Patient Id 300100202",  model);
+                "I need the diagnosis history of Patient Id 300100202",  modelOpenAI);
         long patientId2 = RAGHealthCareBuilder.patientIdExtractor(
-                "I need the diagnosis history of Patient 400100201",  model);
+                "I need the diagnosis history of Patient 400100201",  modelOpenAI);
 
         Patient patient3 = RAGHealthCareBuilder.patientNameExtractor(
-                "I need the diagnosis history for the past 4 years", model);
+                "I need the diagnosis history for the past 4 years", modelOpenAI);
 
         long patientId3 = RAGHealthCareBuilder.patientIdExtractor(
-                "I need the diagnosis history of Sam",  model);
+                "I need the diagnosis history of Sam",  modelOpenAI);
     }
 
     /**
@@ -67,7 +67,7 @@ public class _59_RAG_HealthCare_Example {
         // testPatientDataExtractor();
 
         // Create Chat Language Model - Open AI GPT 4o
-        ChatLanguageModel model = AiBeans.getChatLanguageModelOpenAi(AiConstants.GPT_4o);
+        ChatLanguageModel modelOpenAI = AiBeans.getChatLanguageModelOpenAi(AiConstants.GPT_4o);
         AiBeans.printModelDetails(AiConstants.LLM_OPENAI, AiConstants.GPT_4o);
         // Create the Assistant
         // Setting up the Gen AI Context with Open AI LLM, and RAG
