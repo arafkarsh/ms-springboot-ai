@@ -81,8 +81,8 @@ public class _08_FewShot_Example {
 
     public static void main(String[] args) {
         // Create Chat Language Model Ollama Qwen 2.5
-        ChatLanguageModel modelQwen = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_QWEN_2_5);
-        AiBeans.printModelDetails(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_QWEN_2_5);
+        ChatLanguageModel modelQwen = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_QWEN);
+        AiBeans.printModelDetails(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_QWEN);
 
         // Build Chat Context
         buildContext();
