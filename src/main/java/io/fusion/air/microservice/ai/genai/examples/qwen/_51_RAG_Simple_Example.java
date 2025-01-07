@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.fusion.air.microservice.ai.genai.examples.llama3;
+package io.fusion.air.microservice.ai.genai.examples.qwen;
 
 import dev.langchain4j.model.chat.ChatLanguageModel;
 import io.fusion.air.microservice.ai.genai.core.assistants.Assistant;
@@ -37,11 +37,11 @@ public class _51_RAG_Simple_Example {
      * <p>
      */
     public static void main(String[] args) {
-        // Create Chat Language Model Google Llama3
-        ChatLanguageModel modelLlama3 = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_LLAMA3);
-        AiBeans.printModelDetails(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_LLAMA3);
+        // Create Chat Language Model Ollama Qwen 2.5
+        ChatLanguageModel modelQwen = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_QWEN_2_5);
+        AiBeans.printModelDetails(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_QWEN_2_5);
         // Setting up the Gen AI Context with Open AI LLM, and RAG
-        Assistant assistantLlama = RAGBuilder.createCarRentalAssistantSimple(modelLlama3);
+        Assistant assistant = RAGBuilder.createCarRentalAssistantSimple(modelQwen);
         // Start the Conversation with Ozazo Rental Service ChatBot
         // - Hello
         // - I am Sam. Can I cancel my reservation?
@@ -49,6 +49,6 @@ public class _51_RAG_Simple_Example {
         // - I had an accident, should I pay extra?
         // - Can you elaborate the usage policy?
         // - No, thank you.
-        ConsoleRunner.startConversationWith(assistantLlama, "OZAZO Car Rental Service ChatBot");
+        ConsoleRunner.startConversationWith(assistant, "OZAZO Car Rental Service ChatBot");
     }
 }

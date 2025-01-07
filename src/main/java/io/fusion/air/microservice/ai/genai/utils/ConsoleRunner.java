@@ -19,6 +19,7 @@ import io.fusion.air.microservice.ai.genai.core.assistants.Assistant;
 import io.fusion.air.microservice.ai.genai.core.services.ConsoleChatService;
 // Spring
 import io.fusion.air.microservice.utils.Std;
+import io.fusion.air.microservice.utils.Utils;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import java.util.Scanner;
@@ -139,9 +140,13 @@ public class ConsoleRunner implements CommandLineRunner {
             return -1;
         }
         try {
+            long sTime = System.currentTimeMillis();
             String response = assistant.chat(userQuery);
             Std.println("--[HAL9000]---------------------------------------------------------------------------");
             Std.println(response);
+            Std.println(CONSOLE_SLINE);
+            long diffTime = System.currentTimeMillis() - sTime;
+            Std.println("Time HH:MM:SS = "+ Utils.printTimeHoursMinsSeconds(diffTime) + " Milli Seconds = "+diffTime);
             Std.println(CONSOLE_SLINE);
         } catch (Exception e) {
             Std.println("Chat Error: "+e.getMessage());

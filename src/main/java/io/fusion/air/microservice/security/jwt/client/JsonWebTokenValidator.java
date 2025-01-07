@@ -16,12 +16,12 @@
 
 package io.fusion.air.microservice.security.jwt.client;
 // JWT
-
 import io.fusion.air.microservice.domain.exceptions.JWTTokenExpiredException;
 import io.fusion.air.microservice.domain.exceptions.JWTTokenSubjectException;
 import io.fusion.air.microservice.domain.exceptions.JWTUnDefinedException;
 import io.fusion.air.microservice.security.jwt.core.JsonWebTokenConstants;
 import io.fusion.air.microservice.security.jwt.core.TokenData;
+import io.fusion.air.microservice.utils.Utils;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jws;
@@ -309,17 +309,6 @@ public final class JsonWebTokenValidator {
 	 * @return
 	 */
 	public static String printExpiryTime(long time) {
-		String ms="0";
-		String hs="0";
-		String ds="0";
-		long m = time / (1000 * 60);
-		long h = time / (1000 * 60 * 60);
-		long d = time / (1000 * 60 * 60 * 24);
-		if(m > 59) { m = m-(h*60); }
-		if(h > 23) { h = h-(d*24);}
-		ms = (m<10) ? ms + m : ""+m;
-		hs = (h<10) ? hs + h : ""+h;
-		ds = (d<10) ? ds + d : ""+d;
-		return ds + ":" + hs + ":" + ms;
+		return Utils.printTimeDaysHoursMins(time);
 	}
 }
