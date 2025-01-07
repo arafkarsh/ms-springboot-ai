@@ -36,7 +36,7 @@ public class _59_RAG_HealthCare_Example {
      */
     public static void main(String[] args) {
         // Create Chat Language Model - Google Gemini 1.5 Pro
-        ChatLanguageModel model = AiBeans.getChatLanguageModelGoogle(AiConstants.GOOGLE_GEMINI_PRO);
+        ChatLanguageModel modelGemini = AiBeans.getChatLanguageModelGoogle(AiConstants.GOOGLE_GEMINI_PRO);
         AiBeans.printModelDetails(AiConstants.LLM_VERTEX, AiConstants.GOOGLE_GEMINI_PRO);
         // Create the Assistant
         // Setting up the Gen AI Context with Open AI LLM, and RAG

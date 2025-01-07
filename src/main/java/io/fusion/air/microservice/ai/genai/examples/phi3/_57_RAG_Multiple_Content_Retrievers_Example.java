@@ -36,11 +36,11 @@ public class _57_RAG_Multiple_Content_Retrievers_Example {
 
     public static void main(String[] args) {
         // Create Chat Language Model Microsoft PHI - 3
-        ChatLanguageModel model = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_PHI_3);
+        ChatLanguageModel modelPhi = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_PHI_3);
         AiBeans.printModelDetails(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_PHI_3);
         // Create Assistant
         // Setting up the Gen AI Context with Open AI LLM, and RAG
-        Assistant assistant = RAGBuilder.createAssistantWithMultiContentRetrievers(model);
+        Assistant assistant = RAGBuilder.createAssistantWithMultiContentRetrievers(modelPhi);
         // Start the Conversation with Multi Data Source ChatBot
         // - I am Sam. Can I cancel my reservation?
         // - Please explain the refund policy.

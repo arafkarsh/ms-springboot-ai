@@ -36,7 +36,7 @@ public class _59_RAG_HealthCare_Example {
      */
     public static void main(String[] args) {
         // Create Chat Language Model Google Llama3
-        ChatLanguageModel model = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_LLAMA3);
+        ChatLanguageModel modelLlama = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_LLAMA3);
         AiBeans.printModelDetails(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_LLAMA3);
         // Create the Assistant
         // Setting up the Gen AI Context with Open AI LLM, and RAG
