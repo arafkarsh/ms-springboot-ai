@@ -49,10 +49,10 @@ public class _52_RAG_Segments_Example {
      */
     public static void main(String[] args) {
         // Create Chat Language Model Google Llama3
-        ChatLanguageModel model = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_LLAMA3);
+        ChatLanguageModel modelLlama = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_LLAMA3);
         AiBeans.printModelDetails(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_LLAMA3);
         // Setting up the Gen AI Context with Open AI LLM, and RAG
-        CarRentalAssistant assistant = RAGBuilder.createCarRentalAssistantWithSegments(model);
+        CarRentalAssistant assistant = RAGBuilder.createCarRentalAssistantWithSegments(modelLlama);
         // Start the Conversation with Ozazo Rental Service ChatBot
         // - Hello
         // - I am Sam. Can I cancel my reservation?

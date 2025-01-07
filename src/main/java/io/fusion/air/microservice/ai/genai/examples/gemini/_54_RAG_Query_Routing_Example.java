@@ -59,11 +59,11 @@ public class _54_RAG_Query_Routing_Example {
         // WARNING: Query Routing is not working with Llama 3
         // It's not able to pickup the content of the person provided in the biography doc.
         // Create Chat Language Model - Google Gemini 1.5 Pro
-        ChatLanguageModel model = AiBeans.getChatLanguageModelGoogle(AiConstants.GOOGLE_GEMINI_PRO);
+        ChatLanguageModel modelGemini = AiBeans.getChatLanguageModelGoogle(AiConstants.GOOGLE_GEMINI_PRO);
         AiBeans.printModelDetails(AiConstants.LLM_VERTEX, AiConstants.GOOGLE_GEMINI_PRO);
         // Create Ai Assistant
         // Setting up the Gen AI Context with Open AI LLM, and RAG
-        Assistant assistant = RAGBuilder.createAssistantWithQueryRouter(model);
+        Assistant assistant = RAGBuilder.createAssistantWithQueryRouter(modelGemini);
         // Start the Conversation with Multi Data Source ChatBot
         // - What is the legacy of Akiera Kiera?
         // - When was he born?

@@ -49,11 +49,11 @@ public class _52_RAG_Segments_Example {
      */
     public static void main(String[] args) {
         // Create Chat Language Model Google Vertex AI - PaLM 2
-        ChatLanguageModel model = AiBeans.getChatLanguageModelGoogle(AiConstants.GOOGLE_PALM_CHAT_BISON);
+        ChatLanguageModel modelPalm = AiBeans.getChatLanguageModelGoogle(AiConstants.GOOGLE_PALM_CHAT_BISON);
         AiBeans.printModelDetails(AiConstants.LLM_VERTEX, AiConstants.GOOGLE_PALM_CHAT_BISON);
         // Create the Assistant
         // Setting up the Gen AI Context with Open AI LLM, and RAG
-        CarRentalAssistant assistant = RAGBuilder.createCarRentalAssistantWithSegments(model);
+        CarRentalAssistant assistant = RAGBuilder.createCarRentalAssistantWithSegments(modelPalm);
         // Start the Conversation with Ozazo Rental Service ChatBot
         // - Hello
         // - I am Sam. Can I cancel my reservation?

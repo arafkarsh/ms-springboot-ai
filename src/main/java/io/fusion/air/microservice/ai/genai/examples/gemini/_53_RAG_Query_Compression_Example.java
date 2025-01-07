@@ -52,11 +52,11 @@ public class _53_RAG_Query_Compression_Example {
      */
     public static void main(String[] args) {
         // Create Chat Language Model - Google Gemini 1.5 Pro
-        ChatLanguageModel model = AiBeans.getChatLanguageModelGoogle(AiConstants.GOOGLE_GEMINI_PRO);
+        ChatLanguageModel modelGemini = AiBeans.getChatLanguageModelGoogle(AiConstants.GOOGLE_GEMINI_PRO);
         AiBeans.printModelDetails(AiConstants.LLM_VERTEX, AiConstants.GOOGLE_GEMINI_PRO);
         // Create Ai Assistant
         // Setting up the Gen AI Context with Open AI LLM, and RAG
-        Assistant assistant = RAGBuilder.createAssistantWithQueryTransformer();
+        Assistant assistant = RAGBuilder.createAssistantWithQueryTransformer(modelGemini);
         // Start the Conversation with Akiera Kiera Biography ChatBot
         // - What is the legacy of Akiera Kiera?
         // - When was he born?

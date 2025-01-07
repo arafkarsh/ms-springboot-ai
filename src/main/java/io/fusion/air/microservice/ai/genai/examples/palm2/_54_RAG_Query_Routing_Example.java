@@ -57,11 +57,11 @@ public class _54_RAG_Query_Routing_Example {
      */
     public static void main(String[] args) {
         // Create Chat Language Model Google Vertex AI - PaLM 2
-        ChatLanguageModel model = AiBeans.getChatLanguageModelGoogle(AiConstants.GOOGLE_PALM_CHAT_BISON);
+        ChatLanguageModel modelPalm = AiBeans.getChatLanguageModelGoogle(AiConstants.GOOGLE_PALM_CHAT_BISON);
         AiBeans.printModelDetails(AiConstants.LLM_VERTEX, AiConstants.GOOGLE_PALM_CHAT_BISON);
         // Create the Assistant
         // Setting up the Gen AI Context with Open AI LLM, and RAG
-        Assistant assistant = RAGBuilder.createAssistantWithQueryRouter(model);
+        Assistant assistant = RAGBuilder.createAssistantWithQueryRouter(modelPalm);
         // Start the Conversation with Multi Data Source ChatBot
         // - What is the legacy of Akiera Kiera?
         // - When was he born?

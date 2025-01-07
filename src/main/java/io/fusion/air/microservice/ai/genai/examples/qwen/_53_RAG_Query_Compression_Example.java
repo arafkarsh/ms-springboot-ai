@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.fusion.air.microservice.ai.genai.examples.anthropic;
+package io.fusion.air.microservice.ai.genai.examples.qwen;
 
 import dev.langchain4j.model.chat.ChatLanguageModel;
 import io.fusion.air.microservice.ai.genai.core.assistants.Assistant;
@@ -51,12 +51,11 @@ public class _53_RAG_Query_Compression_Example {
      * used for conversation. For instance, you might use a smaller local model trained for summarization.
      */
     public static void main(String[] args) {
-        // Create Chat Language Model - Anthropic Claude 3 Haiku
-        ChatLanguageModel modelAnthropic = AiBeans.getChatLanguageModelAnthropic(AiConstants.ANTHROPIC_CLAUDE_3_HAIKU);
-        AiBeans.printModelDetails(AiConstants.LLM_ANTHROPIC, AiConstants.ANTHROPIC_CLAUDE_3_HAIKU);
-        // Create Ai Assistant
+        // Create Chat Language Model Ollama Qwen 2.5
+        ChatLanguageModel modelQwen = AiBeans.getChatLanguageModelLlama(AiConstants.OLLAMA_QWEN_2_5);
+        AiBeans.printModelDetails(AiConstants.LLM_OLLAMA, AiConstants.OLLAMA_QWEN_2_5);
         // Setting up the Gen AI Context with Open AI LLM, and RAG
-        Assistant assistant = RAGBuilder.createAssistantWithQueryTransformer(modelAnthropic);
+        Assistant assistant = RAGBuilder.createAssistantWithQueryTransformer(modelQwen);
         // Start the Conversation with Akiera Kiera Biography ChatBot
         // - What is the legacy of Akiera Kiera?
         // - When was he born?
