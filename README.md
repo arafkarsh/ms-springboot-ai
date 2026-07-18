@@ -1,13 +1,15 @@
 # AI/ML & Gen Ai -  Langchain4J & Deep Learning 4J
-## Java 23, Springboot 3.4.1 Examples
+## Java 25, Springboot 4.1.0 Examples
+
+> **Migration In Process....**
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=arafkarsh_ms-springboot-324-ai&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=arafkarsh_ms-springboot-324-ai)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=arafkarsh_ms-springboot-324-ai&metric=bugs)](https://sonarcloud.io/summary/new_code?id=arafkarsh_ms-springboot-324-ai)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=arafkarsh_ms-springboot-324-ai&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=arafkarsh_ms-springboot-324-ai)
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=arafkarsh_ms-springboot-324-ai&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=arafkarsh_ms-springboot-324-ai)
 
-- Java 23
-- SpringBoot 3.4.1
+- Java 25
+- SpringBoot 4.1.0
 - LangChain4J 0.36.0
 - Deep Learning 4J 1.0.0-M2.1
 
